@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<title>APS1051 碎片化核心研習手冊 (Sessions 1–3)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 11mm 10mm 11mm 10mm;
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.42;
+    font-size: 9.3pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Cover & Headers */
+  .cover-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1e40af 100%);
+    color: #ffffff;
+    padding: 22px 26px;
+    border-radius: 9px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  }
+  
+  .course-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .cover-title {
+    font-size: 18pt;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  .cover-subtitle {
+    font-size: 10.5pt;
+    font-weight: 500;
+    color: #93c5fd;
+    margin: 0 0 8px 0;
+  }
+  
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 8pt;
+  }
+  
+  .meta-item strong {
+    color: #cbd5e1;
+    display: block;
+    font-size: 7.2pt;
+    text-transform: uppercase;
+  }
+
+  /* Module Section Banners */
+  .section-banner {
+    padding: 9px 14px;
+    border-radius: 7px;
+    color: #ffffff;
+    margin: 16px 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  
+  .banner-s1 { background: linear-gradient(135deg, #881337 0%, #be123c 100%); }
+  .banner-s2 { background: linear-gradient(135deg, #064e3b 0%, #059669 100%); }
+  .banner-s3 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+  .banner-summary { background: linear-gradient(135deg, #312e81 0%, #4f46e5 100%); }
+  .banner-quiz { background: linear-gradient(135deg, #701a75 0%, #a21caf 100%); }
+  
+  .banner-title {
+    font-size: 11.5pt;
+    font-weight: 800;
+    margin: 0;
+  }
+  
+  .banner-desc {
+    font-size: 8pt;
+    opacity: 0.92;
+    font-weight: 400;
+  }
+
+  /* Micro-learning Card Styles */
+  .card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 5px;
+    margin-bottom: 6px;
+  }
+  
+  .card-num {
+    font-weight: 800;
+    font-size: 8pt;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  
+  .badge-s1 { background: #ffe4e6; color: #9f1239; border: 1px solid #fecdd3; }
+  .badge-s2 { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+  .badge-s3 { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+  
+  .card-title {
+    font-size: 10pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    flex-grow: 1;
+    margin-left: 8px;
+  }
+  
+  .card-cat {
+    font-size: 7.2pt;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  /* Block Types inside Cards */
+  .card-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .block {
+    border-radius: 5px;
+    padding: 5px 9px;
+    font-size: 8.6pt;
+  }
+  
+  .block-label {
+    font-weight: 700;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* 30s Intuition */
+  .block-intuition {
+    background-color: #f8fafc;
+    border-left: 3.5px solid #0284c7;
+    color: #0f172a;
+  }
+  .block-intuition .block-label { color: #0284c7; }
+
+  /* Formula */
+  .block-formula {
+    background-color: #f1f5f9;
+    border-left: 3.5px solid #4338ca;
+    color: #0f172a;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  }
+  .block-formula .block-label { color: #4338ca; font-family: -apple-system, sans-serif; }
+  .math-code {
+    font-weight: 700;
+    font-size: 9pt;
+    color: #1e1b4b;
+    margin: 2px 0 3px 0;
+    display: block;
+    background: #e2e8f0;
+    padding: 3px 7px;
+    border-radius: 4px;
+  }
+  .var-desc {
+    font-size: 7.8pt;
+    color: #334155;
+    font-family: -apple-system, sans-serif;
+    margin-top: 2px;
+  }
+
+  /* Real Market Constraints */
+  .block-constraint {
+    background-color: #f0fdf4;
+    border-left: 3.5px solid #16a34a;
+    color: #14532d;
+  }
+  .block-constraint .block-label { color: #16a34a; }
+
+  /* Pitfall / Trap */
+  .block-trap {
+    background-color: #fffbeb;
+    border-left: 3.5px solid #d97706;
+    color: #78350f;
+  }
+  .block-trap .block-label { color: #d97706; }
+
+  /* Flashcard / Quick Quiz */
+  .block-quiz {
+    background-color: #faf5ff;
+    border-left: 3.5px solid #9333ea;
+    color: #581c87;
+  }
+  .block-quiz .block-label { color: #9333ea; }
+  .quiz-q { font-weight: 700; color: #581c87; margin-bottom: 2px; font-size: 8.4pt; }
+  .quiz-a { font-size: 8pt; color: #3b0764; background: #f3e8ff; padding: 4px 7px; border-radius: 4px; margin-top: 2px; }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0;
+    font-size: 7.8pt;
+  }
+  
+  th, td {
+    padding: 4.5px 7px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .page-break {
+    page-break-before: always;
+    break-before: always;
+  }
+  
+  /* Footer note */
+  .doc-footer {
+    text-align: center;
+    font-size: 7.5pt;
+    color: #64748b;
+    margin-top: 14px;
+    padding-top: 6px;
+    border-top: 1px solid #e2e8f0;
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover Page / Header -->
+<div class="cover-header">
+  <div class="course-badge">APS1051 • Portfolio Management under Real Market Constraints</div>
+  <h1 class="cover-title">碎片化核心研習手冊：第一至三課全精粹閃卡</h1>
+  <div class="cover-subtitle">Bite-Sized Micro-Learning Master Cards (Sessions 1, 2, and 3)</div>
+  <div style="font-size: 8.4pt; color: #e2e8f0; line-height: 1.4;">
+    專為碎片化學習、通勤速記、考前衝刺及機構面試設計。全套包含 <strong>30 張量化核心知識卡</strong>、<strong>全三課公式對照矩陣</strong> 及 <strong>20 題極速自測閃卡</strong>。每張卡片 2-3 分鐘極速掌握：直覺 + 公式 + 真實約束 + 陷阱 + 自測。
+  </div>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Institution / 機構</strong>University of Toronto (ELITE MEng)</div>
+    <div class="meta-item"><strong>Instructors / 教授</strong>Sabatino Costanzo &amp; Loren Trigo</div>
+    <div class="meta-item"><strong>Student / 研習者</strong>ChunKit Poon (潘俊傑)</div>
+    <div class="meta-item"><strong>Format / 特色</strong>Bilingual Dual-Track (英/中/粵直覺)</div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODULE 1: SESSION 1 — PORTFOLIO & MANAGER EVALUATION                      -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-s1">
+  <div>
+    <div class="banner-title">第一模組：第一課 —— 投資組合與基金經理業績評估 (Session 1)</div>
+    <div class="banner-desc">事後風險調整收益、Treynor、Sharpe、Jensen's Alpha、二元風險分解與 Brinson 業績歸因</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">9 CARDS</div>
+</div>
+
+<!-- CARD 01 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 01</span>
+    <h2 class="card-title">絕對回報陷阱與風險調整收益 (Absolute Return is Meaningless)</h2>
+    <span class="card-cat">績效評估哲學</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      金融第一法則：<strong>單睇賺幾多厘係毫無意義嘅！</strong> 一個經理賺 18%，如果佢借咗 5 倍孖展、重倉單一妖股，隨時下個月爆煲歸零。另一個經理賺 11%，但最大回撤只有 2%，兩者質量天差地遠。機構評估只睇「每冒一單位風險，換返幾多超額回報」。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 核心理念公式 (CORE FORMULATION)</div>
+      <span class="math-code">Excess Return per Unit of Risk = (R_p - R_f) / Risk_Measure</span>
+      <div class="var-desc">• R_p: 組合實際回報 | R_f: 無風險利率 (Cash Hurdle) | Risk_Measure: 系統性風險 (β) 或 總波動率 (σ)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 真實市場約束 (REAL MARKET CONSTRAINTS)</div>
+      機構委託通常有嚴格的風險預算（Risk Budget）和追繳保證金條款（Margin Call）。無視風險盲目追求高回報，在真實市場會觸發強制平倉或被養老金贖回。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 高頻考點與陷阱 (PITFALL ALERT)</div>
+      誤區：經理 A 收益 15%，經理 B 收益 12%，故 A 必然優於 B？<strong>錯！</strong> 如果經理 A 的 Beta 是 1.5，而經理 B 的 Beta 只有 0.7，經理 A 只是在牛市加槓桿吹泡泡。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼在評估主動經理時必須扣除 R_f (無風險利率)？</div>
+      <div class="quiz-a">A: 因為買無風險國債完全不需要承擔任何市場波動與破產風險。經理必須為投資者創造超越「躺平收益」的真實超額溢價，這才是其管理費的合理對價。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 02 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 02</span>
+    <h2 class="card-title">特雷諾比率 (Treynor Ratio): 系統性市場風險的定價尺規</h2>
+    <span class="card-cat">系統性風險評估</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      特雷諾比率專門用嚟衡量<strong>「每承擔一單位大市宏觀波動（Beta），可以賺到幾多超額回報」</strong>。佢假設投資者已經有一隻高度分散嘅主資產池，所以個股嘅特有倒霉事已經被對沖晒，剩返要管嘅就只有宏觀大市風險。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背公式與變量 (FORMULA)</div>
+      <span class="math-code">T_p = (R_p - R_f) / β_p , 其中 β_p = Cov(R_p, R_m) / Var(R_m) = ∑ w_i β_i</span>
+      <div class="var-desc">• β_p: 組合相對於基準大市的貝塔敏感度 (系統性風險) | 分母完全不包含個股特異方差</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 課堂算例與實務意義 (CLASSROOM CASE)</div>
+      課堂經典對比：經理 A 賺 14% (β=1.2)，經理 B 賺 11% (β=0.8)，R_f = 3%：<br>
+      • T_A = (14% - 3%) / 1.2 = <strong>9.17%</strong><br>
+      • T_B = (11% - 3%) / 0.8 = <strong>10.00%</strong> (經理 B 逆轉勝出！每單位市場風險回報更高)。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 適用邊界陷阱 (CRUCIAL BOUNDARY TRAP)</div>
+      特雷諾比率<strong>絕對不能</strong>用於評估投資者的「全部身家（Standalone Portfolio）」！如果該基金持有高度集中的少數個股，特異風險極大，但如果其 Beta 恰好較小，Treynor 會給出虛假的高評分。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 什麼情境下使用 Treynor Ratio 評估基金最為合理？</div>
+      <div class="quiz-a">A: 當該基金只是大型機構（如大學捐贈基金、養老金）整體多元化配置中的一個「子模組/衛星配置（Sub-portfolio）」時最合理。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 03 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 03</span>
+    <h2 class="card-title">夏普比率 (Sharpe Ratio) 與「分母之戰」 (The Denominator Battle)</h2>
+    <span class="card-cat">總風險評估</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      夏普比率睇嘅係<strong>「總波動率（Total Volatility, σ_p）」</strong>！不管你係因為大市加息跌，定係因為持倉公司 CEO 造假爆煲，只要你淨值大上大落，分母 σ_p 即刻飆升，夏普比率被狠狠打沉。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背公式與變量 (FORMULA)</div>
+      <span class="math-code">S_p = (R_p - R_f) / σ_p , 其中 σ_p = √(β_p² σ_m² + σ_ε²)</span>
+      <div class="var-desc">• σ_p: 收益率樣本標準差 (總風險) | 同時懲罰系統性風險 (β_p²σ_m²) 與 非系統性風險 (σ_ε²)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 SHARPE VS. TREYNOR 核心決策準則 (DECISION RULE)</div>
+      • <strong>獨立全副身家投資 (Standalone Portfolio):</strong> 必須採用 <strong>Sharpe Ratio</strong>（投資者必須承擔所有未分散的波動）。<br>
+      • <strong>大型機構子組合 (Sub-portfolio in master fund):</strong> 採用 <strong>Treynor Ratio</strong>。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 排名衝突原因 (WHY RANKINGS DIVERGE)</div>
+      當經理重倉未分散的單一股票賭方向時，σ_ε² 巨大，導致 σ_p 暴增，此時 <strong>Sharpe 排名暴跌，而 Treynor 排名可能依然虛高</strong>。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 一個完全複製標普 500 指數的被動基金，其 Sharpe 和 Treynor 關係如何？</div>
+      <div class="quiz-a">A: 兩者排名完全一致！因為完全分散的組合其特異風險 σ_ε² = 0，總風險 σ_p 完全由 β_p · σ_m 構成，兩者呈嚴格線性比例轉換。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 04 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 04</span>
+    <h2 class="card-title">詹森阿爾法 (Jensen's Alpha): 剝離大市水位的「照妖鏡」</h2>
+    <span class="card-cat">超額收益檢驗</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      水漲船高唔算本事！大牛市賺 16%，如果大市升咗 20%，經理仲借咗槓桿（β=1.5），按照 CAPM 佢本應賺 28.5%！結果只賺 16%，其真實能力是<strong>倒蝕 -12.5%</strong>。Jensen's Alpha 就是剝離市場 Beta 後的純主動選股技能。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背公式與回歸方程 (FORMULA)</div>
+      <span class="math-code">α_p = R_p - [R_f + β_p (R_m - R_f)]</span>
+      <span class="math-code">OLS Regression: (R_{p,t} - R_{f,t}) = α_p + β_p (R_{m,t} - R_{f,t}) + ε_t</span>
+      <div class="var-desc">• 截距項 α_p 代表超額收益率 | 斜率項 β_p 代表市場敏感度 | 必須檢驗 t-statistic > 2.0 (p < 0.05)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 真實市場約束與顯著性 (STATISTICAL SIGNIFICANCE)</div>
+      在量化實踐中，正的 Alpha 可能是統計運氣。機構要求至少 36–60 個月月度回歸，且 <strong>t-stat > 2.0</strong>，確認在 95% 置信度下排除了隨機噪聲，方能收取 2/20 管理費。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 典型計算陷阱 (CALCULATION TRAP)</div>
+      切勿直接用名義收益相減 (R_p - R_m)！必須先計算 CAPM 基準門檻 R_f + β_p(R_m - R_f)，再用 R_p 減去門檻。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若 R_f = 3%, R_m = 11%, 經理回報 R_p = 12%, β_p = 1.25，該經理是否創造了正 Alpha？</div>
+      <div class="quiz-a">A: 否！CAPM 預期門檻 = 3% + 1.25 × (11% - 3%) = 13.0%。實際賺 12.0%，Alpha = 12% - 13% = -1.0% (跑輸基準 100 bps)。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 05 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 05</span>
+    <h2 class="card-title">總方差二元正交分解 (Orthogonal Risk Decomposition)</h2>
+    <span class="card-cat">風險結構定理</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      任何投資組合的總方差都可以乾淨俐落地切成兩半：<strong>宏觀系統性震盪 + 微觀特異倒霉事</strong>。市場是精明的，既然你買 30 隻股票就能免費消滅微觀倒霉事，市場就絕對不會為你承擔特異風險支付一分錢溢價！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背分解公式 (DECOMPOSITION FORMULA)</div>
+      <span class="math-code">σ_p² = β_p² σ_m²  +  σ_ε²</span>
+      <div class="var-desc">• 系統性方差 (Systematic): β_p² σ_m² (宏觀利率、通脹、戰爭，無法分散)<br>• 非系統性方差 (Unsystematic/Idiosyncratic): σ_ε² (個別公司訴訟、財務爆雷，隨 N 趨近 0)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 現實定價含義 (MARKET PRICING IMPLICATION)</div>
+      Capital Market 只對非分散的系統性風險（Beta）給予風險溢價補償。投資者單押個股承擔的 σ_ε² 完全是「做白工（Uncompensated Risk）」。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 概念混淆預警 (TRAP ALERT)</div>
+      系統性風險不能靠加股票來消除，只能透過<strong>改變大類資產配置（如配置國債或現金）</strong>或<strong>衍生品對沖（如放空標普期貨、買沽期權）</strong>來管理。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若組合總波動 σ_p = 25%, 市場波動 σ_m = 15%, β_p = 1.2，其特異風險 σ_ε 是多少？</div>
+      <div class="quiz-a">A: 系統性方差 = (1.2 × 15%)² = (18%)² = 324。總方差 = 25%² = 625。特異方差 σ_ε² = 625 - 324 = 301，故 σ_ε = √301 ≈ 17.35%。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 06 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 06</span>
+    <h2 class="card-title">Alpha vs. Beta &amp; 信息比率 (Information Ratio, IR)</h2>
+    <span class="card-cat">主動管理邊界</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      • <strong>Beta 是廉價自來水：</strong> 買入 SPY ETF，管理費不到 3 個基點（bps），容量無限。<br>
+      • <strong>Alpha 是稀有鑽石：</strong> 零和博弈中憑智力搶來的超額溢價，容量受限，收取 2/20 高額管理費。<br>
+      • <strong>信息比率 (IR)：</strong> 衡量經理「每偏離基準指數 1% 的跟蹤風險，能換回多少穩定超額收益」。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背公式與變量 (FORMULA)</div>
+      <span class="math-code">IR = (R_p - R_B) / Tracking_Error = (R_p - R_B) / σ_(R_p - R_B)</span>
+      <div class="var-desc">• R_B: 基準指數回報 (e.g. S&P 500) | 分母為主動跟蹤誤差 (Tracking Error)，即主動回報的波動率</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 機構養老金評估準則 (INSTITUTIONAL STANDARD)</div>
+      養老金選拔股票經理最看 IR：IR > 0.5 為優秀；IR > 1.0 為頂尖傳奇。IR 越高，代表超額收益越穩定，而不是「一年暴賺、三年跑輸」的神經質走勢。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ SHARPE VS. IR 門檻區分 (SHARPE VS IR DIFFERENCE)</div>
+      Sharpe 的扣除基準是通用無風險利率 R_f；而 IR 的扣除基準是明確的委託指數 R_B。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 一個經理超額收益 R_p - R_B = 4%，跟蹤誤差為 8%，其 IR 是多少？評價如何？</div>
+      <div class="quiz-a">A: IR = 4% / 8% = 0.50。屬於機構認可的良好經理水準（Good / Acceptable）。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 07 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 07</span>
+    <h2 class="card-title">CSI 機構級夏普比率門檻 (Annualized Sharpe Benchmarks)</h2>
+    <span class="card-cat">實盤水準常模</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      年化 Sharpe 低過 0.5 係垃圾，不如買指數；0.5 到 1.0 係正常基金標準；超過 1.0 係頂尖對沖基金。<strong>如果有人推銷年化 Sharpe > 2.0 的量化策略，九成九係騙局、過度擬合、或者偷偷賣緊深度虛值期權（賣保險）！</strong>
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 CSI 年化標準劃分 (BENCHMARK TIERS)</div>
+      <span class="math-code">• S_p &lt; 0.50 : Substandard (不及格，不如買被動指數 ETF)<br>• 0.50 ≤ S_p &lt; 1.00 : Good / Acceptable (常規股票公募/長倉基金標準)<br>• 1.00 ≤ S_p &lt; 1.50 : Superior (頂尖對沖基金、全天候風險平價水準)<br>• S_p ≥ 2.00 : Suspicious (極度可疑：非流動性假象、尾部賣期權、過度擬合)</span>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 S_P ≥ 2.00 的華爾街作弊真相 (SUSPICIOUS TRAPS)</div>
+      1. <strong>賣虛值沽期權 (Short OTM Put):</strong> 99% 的月份穩賺期權費，波動率極小，夏普虛高；直到黑天鵝降臨，單月爆倉倒閉。<br>
+      2. <strong>非流動性平滑 (Illiquidity Smoothing):</strong> 像私募股權，資產不用市價標記（Mark-to-Market），波動被人為抹平。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 回測陷阱 (BACKTEST DATA-MINING)</div>
+      歷史回測中若調出 Sharpe 2.5 的參數，實盤上線必定崩潰（Overfitting）。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼賣出深虛值標普 500 看跌期權的策略在常規年份夏普比率奇高？</div>
+      <div class="quiz-a">A: 因為期權金收入極度穩定，分母短期波動率趨近於零；但它具有嚴重的負偏態（Negative Skewness）和極端左尾風險，並非真正的可持續超額收益。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 08 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 08</span>
+    <h2 class="card-title">Brinson 業績歸因框架 (Brinson Attribution Framework)</h2>
+    <span class="card-cat">超額收益拆解</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Brinson 歸因回答終極問題：<strong>經理跑贏大市，到底是靠宏觀板塊擇時（大局觀），還是靠選個股（微觀眼光）？</strong><br>
+      • <strong>配置效應 (ΔA):</strong> 宏觀超配強勢板塊、低配弱勢板塊賺到的錢。<br>
+      • <strong>選股效應 (ΔS):</strong> 板塊權重不變下，挑出的個股跑贏板塊基準賺到的錢。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背 BRINSON-HOOD-BEEBOWER (BHB) 公式</div>
+      <span class="math-code">Total Active Value Added = R_p - R_B = ∑ ΔA_i + ∑ ΔS_i</span>
+      <span class="math-code">配置效應 (Allocation): ΔA_i = (w_{p,i} - w_{B,i}) · (R_{B,i} - R_B)</span>
+      <span class="math-code">選股效應 (Selection):  ΔS_i = w_{p,i} · (R_{p,i} - R_{B,i})</span>
+      <div class="var-desc">• w_{p,i}, w_{B,i}: 組合與基準在板塊 i 的權重 | R_{B,i}, R_B: 板塊基準收益與全市場基準收益 | R_{p,i}: 組合在該板塊的實際收益</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 配置效應的「負負得正」神技 (NEGATIVE-NEGATIVE WIN)</div>
+      如果某板塊表現很差 (R_{B,i} &lt; R_B)，而經理敏銳地<strong>低配該板塊 (w_{p,i} &lt; w_{B,i})</strong>，兩項相乘為<strong>正數</strong>！這代表經理透過防守性迴避，為組合做出了真實正向貢獻！
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 算式權重陷阱 (WEIGHT ALIGNMENT TRAP)</div>
+      選股效應 ΔS_i 的乘數是經理的<strong>實際投入權重 w_{p,i}</strong>，代表經理投入了多少真實真金白銀去執行他的個股選股邏輯。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若大市漲 7%，能源板塊跌 2%，經理在能源板塊配置 5% (基準為 15%)，其配置效應為正還是負？</div>
+      <div class="quiz-a">A: 嚴格為正！(5% - 15%) × (-2% - 7%) = (-10%) × (-9%) = +0.90% (+90 bps)！經理成功避開了暴跌板塊。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 09 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s1">S1 • CARD 09</span>
+    <h2 class="card-title">Brinson 實戰算例拆解 (+130 bps 數值案例深度覆盤)</h2>
+    <span class="card-cat">經典算例覆盤</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      課堂經典 3 板塊實例（科技、金融、醫療）：基準收益 R_B = 6.90%，組合收益 R_p = 8.20%，超額收益合計 <strong>+1.30% (+130 bps)</strong>。經理同時具備宏觀配置眼光 (+70 bps) 與微觀選股眼光 (+60 bps)。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 數值精確拆解矩陣 (EXACT NUMERICAL DECOMPOSITION)</div>
+      <table>
+        <tr><th>板塊 Sector</th><th>基準 w_B | R_B</th><th>組合 w_p | R_p</th><th>配置效應 ΔA</th><th>選股效應 ΔS</th></tr>
+        <tr><td><strong>科技 Tech</strong></td><td>40% | 10.0%</td><td>50% | 11.0%</td><td>+10% × (+3.1%) = <strong>+0.310%</strong></td><td>50% × (+1.0%) = <strong>+0.500%</strong></td></tr>
+        <tr><td><strong>金融 Fin</strong></td><td>35% | 4.0%</td><td>20% | 3.0%</td><td>-15% × (-2.9%) = <strong>+0.435%</strong></td><td>20% × (-1.0%) = <strong>-0.200%</strong></td></tr>
+        <tr><td><strong>醫療 Health</strong></td><td>25% | 6.0%</td><td>30% | 7.0%</td><td>+5% × (-0.9%) = <strong>-0.045%</strong></td><td>30% × (+1.0%) = <strong>+0.300%</strong></td></tr>
+        <tr><td><strong>合計 Total</strong></td><td>R_B = <strong>6.90%</strong></td><td>R_p = <strong>8.20%</strong></td><td><strong>∑ ΔA = +0.70% (+70 bps)</strong></td><td><strong>∑ ΔS = +0.60% (+60 bps)</strong></td></tr>
+      </table>
+      <span class="math-code">總驗算: ∑ ΔA (+0.70%) + ∑ ΔS (+0.60%) = +1.30% = R_p - R_B (+130 bps)</span>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 實戰管理學洞察 (MANAGERIAL INSIGHT)</div>
+      金融板塊的個股選股是虧損的 (-20 bps)，但由於經理在宏觀上大幅砍倉金融股 (-15%)，配置效應大賺 +43.5 bps，整體在金融板塊仍為淨正貢獻 (+23.5 bps)。這說明<strong>宏觀大勢順風可以掩蓋微觀瑕疵</strong>。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 算術驗算要求 (RECONCILIATION REQUIREMENT)</div>
+      考試或面試計算時，所有板塊的 ΔA 總和加上 ΔS 總和，必須<strong>完全等於名義超額回報 R_p - R_B</strong>，否則必定是小數點或公式代錯。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 本案例中貢獻最大的單一子項是甚麼？體現了經理的甚麼能力？</div>
+      <div class="quiz-a">A: 科技板塊的選股效應 (+50 bps) 與金融板塊的低配效應 (+43.5 bps)。體現了經理在科技賽道挑黑馬以及敏銳規避下行金融板塊的雙重能力。</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================================================= -->
+<!-- MODULE 2: SESSION 2 — MODERN PORTFOLIO THEORY & MOMENTUM REVIVAL          -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-s2">
+  <div>
+    <div class="banner-title">第二模組：第二課 —— 現代投資組合理論與動量全面復興 (Session 2)</div>
+    <div class="banner-desc">Williams 盲點、Markowitz 協方差、CAPM 三情境證明、低 Beta 異象、Keller 動量復興與平滑山頂</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">9 CARDS</div>
+</div>
+
+<!-- CARD 10 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 10</span>
+    <h2 class="card-title">Williams 股息盲點 vs. Markowitz 協方差分散魔術</h2>
+    <span class="card-cat">MPT 誕生哲學</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      1952 年前，舊派學者 Williams 認為股票價值就是未來股息折現。Markowitz 踢爆盲點：若只追求最高折現回報，<strong>理性人應該將 100% 身家單押全市場最高回報的一隻股票！</strong> 這在現實中等於自殺。Markowitz 的革命在於：<strong>風險是方差，而總方差取決於資產間的協方差（Covariance）與相關性（ρ）</strong>。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背雙資產方差公式 (TWO-ASSET VARIANCE)</div>
+      <span class="math-code">σ_p² = w_1² σ_1² + w_2² σ_2² + 2 w_1 w_2 Cov(R_1, R_2) = w_1² σ_1² + w_2² σ_2² + 2 w_1 w_2 ρ_{1,2} σ_1 σ_2</span>
+      <div class="var-desc">• 當 ρ &lt; 1 時，組合標準差 σ_p 嚴格小於各資產標準差的加權平均值 | 當 ρ = -1 時，可構造完全零風險組合</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 教授經典比喻：新加坡零售 VS 巴西醫療 (CLASSROOM EXAMPLE)</div>
+      兩隻單獨看波動都極大的股票，但新加坡零售與巴西醫院在宏觀上毫無瓜葛（ρ ≈ 0）。當新加坡生意差時，巴西醫院完全不受影響，兩者結合使總方差銳減。這就是「免費的午餐」！
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 相關係數的致命假設 (CORRELATION FRAGILITY)</div>
+      在正常市場 ρ 接近 0 或負數；但在<strong>金融海嘯（如 2008 雷曼破產、2020 流動性危機）時，所有風險資產相關係數暴升趨向 1.0</strong>，分散投資效果短期嚴重失效！
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼資產權重相同時，組合方差更取決於協方差而不是單個資產的方差？</div>
+      <div class="quiz-a">A: 在 N 隻資產的矩陣中，單個方差項只有 N 個（對角線），而協方差項高達 N(N-1) 個（非對角線）。當 N 增大時，協方差項佔總方差的比例壓倒性增大！</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 11 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 11</span>
+    <h2 class="card-title">Sharpe CAPM 一般均衡與黑板三情境證明 (K_e = 8.6%)</h2>
+    <span class="card-cat">資產定價模型</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Sharpe 將 Markowitz 推向宏觀一般均衡：如果所有人都在前緣優化，資產的公允合約收益率該如何定價？教授黑板「三情境思維實驗」給出了最直觀的經濟學證明：<strong>多承受 10% 的市場風險，就必須精確補償 10% 的市場溢價！</strong>
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 CAPM 核心公式與黑板三情境 (THE 3 SCENARIOS)</div>
+      <span class="math-code">E[R_i] = R_f + β_i (R_m - R_f)</span>
+      <div class="var-desc">
+        • <strong>情境 1 (無風險錨點):</strong> 政府國債保證收益 R_f = 2% (時間價值基準)。<br>
+        • <strong>情境 2 (中等市場風險):</strong> 基金 β = 1.0，扣除手續費若只給 2% 回報必定遭全市場拒絕！必須補償大市溢價 (R_m - R_f = 8% - 2% = 6%)，總回報必須給足 8%。<br>
+        • <strong>情境 3 (高風險基金):</strong> 進攻型基金風險比大市高 10% (β = 1.1)，公允定價 K_e = 2% + 1.1 × (8% - 2%) = 2% + 6.6% = <strong>8.6%</strong>！
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 證券市場線 (SECURITY MARKET LINE, SML)</div>
+      連接 (0, R_f) 與 (1, R_m) 乃至 (1.1, 8.6%) 的直線就是 SML。落在 SML 上方的資產被低估（定價便宜，Alpha > 0）；落在 SML 下方的資產被高估（Alpha &lt; 0）。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ SML VS. CML 易錯點 (SML VS CML DISTINCTION)</div>
+      • <strong>CML (資本市場線):</strong> 橫坐標是<strong>總標準差 σ</strong>，只適用於有效前緣上的最優組合。<br>
+      • <strong>SML (證券市場線):</strong> 橫坐標是<strong>系統性風險 β</strong>，適用於市場上任何單個股票或無效組合！
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若某股票 β = 1.5, R_f = 2%, R_m = 8%，其在 SML 上的公允預期回報是多少？</div>
+      <div class="quiz-a">A: E[R] = 2% + 1.5 × (8% - 2%) = 2% + 9% = 11.0%。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 12 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 12</span>
+    <h2 class="card-title">低 Beta 異象與五維量化選股終極公式</h2>
+    <span class="card-cat">多因子定價革命</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      教科書說「高風險高回報」，但實證數據狠狠打臉：<strong>過去數十年高 Beta 股票長期跑輸，低 Beta 防守股反而持續跑贏（Low-Beta Anomaly）！</strong> 結合 Fama-French 因子，量化基金發展出跨維度選股篩選器。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 五維量化選股終極公式 (THE 5-FACTOR QUANT SCREEN)</div>
+      <span class="math-code">Target Assets = [Low Beta] + [Value Style] + [Small Cap] + [Illiquid] + [Upward Momentum]</span>
+      <div class="var-desc">
+        • Low Beta: 抵禦下行黑天鵝 | Value (低 P/B): 安全邊際與均值回歸 | Small Cap (SMB): 規模溢價<br>
+        • Illiquid: 獲取非流動性補償溢價 | Upward Momentum: 順應過去 3-12 個月趨勢慣性
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 教授重要警示：長線複利 VS 週期回撤 (PROFESSOR CAVEAT)</div>
+      五維篩選組合在數十年的超長尺度下年化複利極高（CAGR 驚人），但過程中會經歷長達數年的折磨式週期回撤（Cyclical Drawdowns），需要極其耐心的機構資本（Patient Capital）才能堅守。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 動量與價值的衝突 (MOMENTUM VS VALUE FRICTION)</div>
+      價值股往往是深陷困境、股價暴跌的「落難股」，其短期動量可能為負。因此多因子模型需要精細的權重動態平衡，而非機械生搬硬套。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼低 Beta 股票在真實市場中反而能取得超越高 Beta 股票的風險調整收益？</div>
+      <div class="quiz-a">A: 機構經理受限於不能開槓桿，為了博取高回報往往過度追逐並炒高了高 Beta 股票（估值泡沫）；而低 Beta 股票被忽視低估，反而具有更厚的安全邊際與現金流分紅。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 13 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 13</span>
+    <h2 class="card-title">華爾街拋棄教科書 MVO 的根本病因: 均值回歸與沽空自爆</h2>
+    <span class="card-cat">經典模型診斷</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Markowitz 拿了諾貝爾獎，但華爾街交易員痛罵 MVO 是「誤差放大器（Error Maximizer）」，實盤表現不如小學生買等權重（1/N）。<strong>錯不在數學，而在使用方式！</strong> 傳統模型犯了兩大致命錯誤：用 3-5 年超長窗口估回報，以及允許無約束沽空加槓桿。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 傳統 MVO 兩大病根機制 (THE TWIN FATAL FLAWS)</div>
+      <span class="math-code">1. 36–60 個月回測窗口陷阱: 股票在 3-5 年尺度具有強烈「均值回歸 (Mean Reversion)」</span>
+      <span class="math-code">2. 無約束賣空 (Unconstrained Shorts): w_i &lt; 0 導致優化器在細小估算噪聲上開出極端槓桿</span>
+      <div class="var-desc">• 均值回歸使模型在最高位全倉買入過去的贏家（接火棒），並在最低位放空即將反彈的資產！</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 學術界權威背書 (ACADEMIC CONSENSUS)</div>
+      • Michaud (1989): MVO 本質是把最大權重分配給「估計誤差最大」的資產。<br>
+      • DeMiguel et al. (2007): 複雜樣本外 MVO 的夏普比率系統性輸給最樸素的 1/N 等權重。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 實盤沽空摩擦力 (REAL-WORLD SHORTING FRICTION)</div>
+      教科書假設借貨沽空無成本、無限制。現實中借券需支付昂貴融券費（Borrow Fee），隨時面臨融券召回（Recall），遇逼倉（Short Squeeze）會產生無限下行損失。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼使用 60 個月歷史平均回報作為 MVO 的預期收益輸入會導致策略崩潰？</div>
+      <div class="quiz-a">A: 因為 3 到 5 年是商業週期循環與估值均值回歸的時間尺度。過去 5 年漲幅最大的股票往往估值過高、面臨獲利回吐，此時重倉相當於「高位站崗」。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 14 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 14</span>
+    <h2 class="card-title">Keller et al. (2015) 兩大動量解藥: 純做多 + 1-12 個月窗口</h2>
+    <span class="card-cat">動量全面復興</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Keller、Butler、Kipnis 震撼證明：Markowitz 模型完全不需要修改！只要施加兩大真實市場解藥：<strong>只准做多（w_i ≥ 0）</strong> ＋ <strong>將回測窗口縮短至 1 到 12 個月（捕捉動量慣性 Momentum Persistence）</strong>，MVO 立即涅槃重生，實盤碾壓等權重與基準指數！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 動量復興雙解藥架構 (DUAL REMEDY ARCHITECTURE)</div>
+      <span class="math-code">解藥 1 (Long-Only Constraint): w_i ≥ 0 ,  ∑ w_i = 1  (杜絕槓桿放大噪聲)</span>
+      <span class="math-code">解藥 2 (Short Momentum Lookback): T ∈ [1, 12] 個月 (捕捉趨勢慣性，避開長週期均值回歸)</span>
+      <div class="var-desc">• 1-12 個月內資產具有顯著的收益與波動「延續性」 (Winners stay winners, Volatility clusters)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 破局核心邏輯 (WHY IT WORKS)</div>
+      1. 純做多邊界條件消除了極端負權重，使優化器變成凸集尋優；<br>
+      2. 1-12 個月窗口剛好落在學術界公認的動量黃金區間（Jegadeesh &amp; Titman 1993），使估計值真正具備樣本外前瞻預測力。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 窗口不能太短 (DON'T GO TOO SHORT)</div>
+      若回測窗口小於 1 個月（如 5-10 天），市場微觀結構噪聲（Bid-Ask Bounce）和短期反轉效應會重新破壞模型。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼短回測窗口（1-12 個月）能拯救 MVO 的預期收益估計？</div>
+      <div class="quiz-a">A: 因為它順應了金融市場中期「強者恆強」的動量溢價（Momentum Premium），使歷史平均收益與未來短期收益方向一致，不再出現長週期的估值均值反轉。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 15 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 15</span>
+    <h2 class="card-title">高中生 Harry 2008 雷曼海嘯模擬: 4 個月窗口、100% 國債與抄底</h2>
+    <span class="card-cat">經典實盤覆盤</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Keller 論文虛構的高中生 Harry，只用 2 隻 ETF（美股 SPY + 國債 TLT）和 <strong>4 個月回測窗口</strong>。2008 年金融海嘯大跌 50%，模型自動判定美股崩潰，果斷切入 <strong>100% 國債 TLT 避險</strong>，零回撤之餘大賺債市暴漲；2009 年 5 月底動量轉正，瞬間換倉 <strong>90% SPY 抄底</strong>！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 HARRY 實驗核心參數與歷史戰績 (HARRY'S TRACK RECORD)</div>
+      <span class="math-code">資產池: SPY (標普 500) + TLT (20年美債) | 窗口: 4 個月 | 目標波動率: TV ≤ 10%</span>
+      <div class="var-desc">
+        • 2008 年 9 月 – 2009 年 4 月 (海嘯期): [0% SPY + 100% TLT] 全程躲過世紀大崩盤！<br>
+        • 2009 年 5 月 (復甦初段): [90% SPY + 10% TLT] 強力吃到牛市初期最強暴漲！<br>
+        • 長期戰績: 年化複合增長率 CAGR = <strong>14.17%</strong> | 年化夏普比率 Sharpe = <strong>1.04</strong> (遠超買入持有標普 500)。
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 避險資產無約束性 (FLIGHT-TO-SAFETY)</div>
+      Harry 成功的關鍵在於：當股市動量轉負且波動率爆發時，安全避險資產（國債 TLT）可以被<strong>配置至 100%</strong>，模型完全不留戀股票。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 股債同跌陷阱 (STOCK-BOND CORRELATION REGIME)</div>
+      在 2008 年低通脹通縮海嘯中，國債充當了完美的避險港灣；但在 2022 年高通脹加息週期中，股債出現雙殺，模型需引入現金（T-Bills）或大宗商品才能防禦。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: Harry 模型的目標波動率 TV ≤ 10% 如何在 2008 年牛熊切換中保護組合？</div>
+      <div class="quiz-a">A: 2008 年 SPY 波動率高達 40-60%，為了滿足 10% 的目標波動率上限，優化器被迫將 SPY 權重降為零，全部資金湧向波動率低且處於牛市的 TLT。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 16 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 16</span>
+    <h2 class="card-title">經典資產配置 (CAA) 架構: 非對稱權重限制與目標波動率</h2>
+    <span class="card-cat">機構級風控架構</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      Keller 等人提出的<strong>經典資產配置（CAA）</strong>是工業級架構：覆蓋 39 隻多資產大池，採用<strong>非對稱權重限制</strong>——風險資產上限封頂 25%（防止孤注一擲），但避險資產（3月美債、10年美債）不設上限（最高 100% 現金避險）。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 CAA 兩大核心支柱 (THE TWO PILLARS OF CAA)</div>
+      <span class="math-code">1. 非對稱資產邊界: 0 ≤ w_{risky, i} ≤ 0.25 (Cap25)  ;  0 ≤ w_{safe, j} ≤ 1.00 (Uncapped)</span>
+      <span class="math-code">2. 雙重目標波動率 (Target Volatility, TV): 進攻型 TV = 10%  ;  防守型 TV = 5%</span>
+      <div class="var-desc">• 下行風險衡量: Calmar 比率 CR5 = (R - 5%) / |Max Drawdown| (CAA 將最大回撤由 -50% 壓縮至 -10% ~ -17%)</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 奇異協方差矩陣破局 (SINGULAR MATRIX HANDLING)</div>
+      當資產數量 N = 39，而月度回測窗口只有 T = 12 個月時，N > T，協方差矩陣 Σ 必然<strong>奇異且不可逆</strong>！CAA 採用 Markowitz 的<strong>臨界線算法 (CLA)</strong>，繞過求逆操作，完美輸出最優解。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 對稱權重限制的錯誤 (THE SYMMETRY FALLACY)</div>
+      如果對所有資產（包括現金和國債）一律強制限制 w_i ≤ 25%，那麼在金融海嘯來臨時，組合將被迫至少持有 50% 以上的暴跌風險資產，無法實現徹底防禦！
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼 CAA 對風險資產設 Cap25 上限，而對安全資產不設上限？</div>
+      <div class="quiz-a">A: 限制風險資產上限防止了組合在單一黑天鵝股票上暴雷；而不限制安全資產則賦予了模型在宏觀危機中「100% 撲向現金/國債以自保」的自由。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 17 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 17</span>
+    <h2 class="card-title">3D 參數優化流形與平滑山頂法則 (The Smooth Summit Rule)</h2>
+    <span class="card-cat">防範過擬合天條</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      量化交易員必背天條！當我們用電腦掃描參數（X 軸回測期，Y 軸持倉期，Z 軸夏普比率），3D 地形圖會出現高山與尖刺。<strong>寧選平緩山頂，莫搶孤峰尖刺！</strong> 平滑山頂具備可微容錯性；尖刺則是過度擬合（Overfitting）的死神陷阱。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 平滑山頂黃金法則 (THE GOLDEN SUMMIT RULE - SLIDE 48)</div>
+      <span class="math-code">"In case there are two or more summits, we MUST SELECT THE ONE THAT IS 'SMOOTHER'<br>(= DIFFERENTIABLE) OVER THE MORE 'ABRUPT' ONES."</span>
+      <div class="var-desc">• 平滑山頂 (Smooth Summit): 梯度 ∇Z 平緩連續，參數輕微漂移時 (如最優窗口從 4 月移到 5 月)，實盤收益近乎不變。<br>• 尖銳刺針 (Abrupt Needle Spike): 數據過擬合產物，實盤市場稍微一變，表現立即垂直墜落懸崖！</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 參數漂移與實盤殘酷性 (REAL-WORLD PARAMETER DRIFT)</div>
+      歷史回測的最佳參數絕不可能與未來的最佳參數 100% 重合。具備數學連續性的平滑曲面才能容忍未來的微小政經環境漂移。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 貪婪陷阱 (THE GREEDY OPTIMIZATION TRAP)</div>
+      很多新手只看代碼跑出來的最大數值（比如 Sharpe 2.8 的尖刺），實盤直接上線，幾個月後虧損崩潰，就是違反了平滑山頂法則。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼在 3D 參數流形中，可微性（Differentiability）代表實盤策略的穩健性？</div>
+      <div class="quiz-a">A: 因為可微性意味著微小的輸入擾動（ΔX, ΔY）只會引發一階泰勒展開微小的輸出變化（ΔZ ≈ ∇Z · Δp），確保策略在實盤市場漂移時表現平穩衰減而非崩盤。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 18 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s2">S2 • CARD 18</span>
+    <h2 class="card-title">Smart Beta 統一論: MV, MD, RP 均為前緣子集</h2>
+    <span class="card-cat">Smart Beta 大一統</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      市場上宣傳得天花亂墜的 Smart Beta 策略——<strong>最小方差 (Minimum Variance)、最多元分散 (Most Diversified)、風險平價 (Risk Parity)</strong>——在數學本質上並非互不相容的新發明，它們<strong>全部都是 Markowitz 效率前緣上的特定點或受約束特例！</strong>
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 統一數學對照表 (THE UNIFICATION MATRIX)</div>
+      <span class="math-code">• 最小方差 (Minimum Variance, MV): 前緣最左端切點，目標函數純粹最小化 w^T C w，完全不看預期收益</span>
+      <span class="math-code">• 最多元分散 (Most Diversified, MD): 最大化分散比率 DR = (w^T σ) / √(w^T C w)，等價於特定收益設定下的 MVO</span>
+      <span class="math-code">• 風險平價 / 等風險貢獻 (Risk Parity, ERC): 令各資產邊際風險貢獻相等 (w_i (Cw)_i = constant)，屬於前緣內側的防守點</span>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 機構配置意義 (INSTITUTIONAL TAKEAWAY)</div>
+      動態 CAA 模型可以根據市場狀態，在前緣這幾個經典策略之間自由滑動：牛市滑向動量切點組合（CMP），熊市滑向最小方差（MVP）或風險平價（RP）。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 風險平價的槓桿依賴陷阱 (RISK PARITY LEVERAGE TRAP)</div>
+      RP 策略為了讓低波動資產（債券）貢獻足夠風險，通常對債券大幅加槓桿。一旦遇上股債雙殺與利率暴升，RP 基金面臨巨額追加保證金。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼最小方差組合（MVP）在實戰中不需要估計預期收益率向量 μ？</div>
+      <div class="quiz-a">A: 因為 MVP 的數學定義是純粹最小化組合方差 min (w^T C w)，其最優權重解析解 w_mvp = C⁻¹ 1 / (1^T C⁻¹ 1) 僅依賴於協方差矩陣 C，完全繞開了最不穩定的預期收益率估計！</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================================================= -->
+<!-- MODULE 3: SESSION 3 — QUANTITATIVE PORTFOLIO ENGINEERING & CONSTRAINTS   -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-s3">
+  <div>
+    <div class="banner-title">第三模組：第三課 —— 量化投資組合工程、數學推導與真實約束實戰 (Session 3)</div>
+    <div class="banner-desc">收益率公理、年化機制、Lagrange 解析四大常數、純做多數值優化、CML 兩基金分離、CLA 破局與三大客戶方案</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">12 CARDS</div>
+</div>
+
+<!-- CARD 19 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 19</span>
+    <h2 class="card-title">收益率公理: 百分比算術收益 (線性) vs 對數連續複利 (非線性陷阱)</h2>
+    <span class="card-cat">量化基礎公理</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      量化工程入門最嚴重的低級數學錯誤：<strong>在權重加權優化中誤用對數收益率（Log Return）！</strong> 對數收益在時間跨度上可以相加，但在<strong>資產橫截面加權中是非線性的</strong>。組合權重優化必須嚴格採用百分比算術收益率（Arithmetic Return）！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 數學公理對比 (MATHEMATICAL AXIOM)</div>
+      <span class="math-code">算術收益率 (Arithmetic): R_{i,t} = (P_{i,t} - P_{i,t-1}) / P_{i,t-1} ⟹ R_{p,t} = ∑ w_i R_{i,t} = w^T R_t (嚴格線性成立！)</span>
+      <span class="math-code">對數收益率 (Logarithmic): r_{i,t} = ln(P_{i,t} / P_{i,t-1}) ⟹ ln(∑ w_i P_t/P_{t-1}) ≠ ∑ w_i ln(P_t/P_{t-1}) (非線性，嚴重失真！)</span>
+      <div class="var-desc">• 組合預期收益 μ_p = w^T μ 僅在算術收益下成立。使用對數收益加權將徹底破壞均值與方差計算的數學有效性。</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 應用分工準則 (OPERATIONAL DIVISION)</div>
+      • <strong>跨資產權重配置與 MVO 優化:</strong> 100% 必須使用<strong>算術收益率 (Arithmetic Returns)</strong>。<br>
+      • <strong>單一資產的時間序列建模與波動率預測 (如 GARCH):</strong> 可以使用對數收益率。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 面試與代碼審查陷阱 (CODE REVIEW PITFALL)</div>
+      在 Python 中寫 `returns = np.log(df / df.shift(1))` 後直接計算協方差並求 `weights.dot(returns)` 是錯誤代碼！應寫 `returns = df.pct_change()`。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼不能把各資產的對數收益率乘以各自權重相加來表示投資組合的收益率？</div>
+      <div class="quiz-a">A: 根據詹森不等式（Jensen's Inequality），對數函數是嚴格凹函數，和的對數不等於對數的和。對數收益加權會系統性低估組合的真實百分比收益率。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 20 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 20</span>
+    <h2 class="card-title">波動率時間可加性與年化機制: 採樣頻率 vs 樣本容量</h2>
+    <span class="card-cat">統計年化原理</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      在金融統計中，<strong>方差（Variance）隨時間線性累積</strong>，所以標準差（波動率）隨時間的<strong>平方根（√t）</strong>膨脹。日度轉年化乘 √252，月度轉年化乘 √12。乘數只代表採樣頻率，與你用了多少筆歷史樣本完全無關！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 必背年化公式與零均值假設 (ANNUALIZATION FORMULAS)</div>
+      <span class="math-code">日度轉年化: σ²_ann = σ²_daily × 252 ⟹ σ_ann = σ_daily × √252  (√252 ≈ 15.8745)</span>
+      <span class="math-code">月度轉年化: σ²_ann = σ²_monthly × 12 ⟹ σ_ann = σ_monthly × √12  (√12 ≈ 3.4641)</span>
+      <span class="math-code">零均值日度近似: 在極短間隔 (日度) 下，μ ≈ 0，故 σ_X² = E[(X - μ)²] ≈ E[X²] (ARCH/GARCH 基準)</span>
+      <div class="var-desc">• 252 或 12 是年化採樣頻率 T_freq | 樣本觀測長度 N_obs 建議 ≥ 60 筆以保證統計估計穩定性。</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 教授重點強調：頻率 VS 樣本容量 (FREQUENCY VS SAMPLE SIZE)</div>
+      就算你只用過去 20 個交易日的極短數據計方差，年化時依然是乘以 252，而<strong>絕不能乘以 20</strong>！很多同學誤把樣本量當作年化乘數，扣分極為嚴重。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 收益率年化的非線性 (COMPOUNDING RETURNS)</div>
+      收益率年化是複利累乘 (1 + R_daily)^252 - 1；而方差年化是直接線性乘以 252。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 某高頻策略日度標準差為 1.0%，其年化波動率是多少？若用 40 天數據計算，年化乘數是多少？</div>
+      <div class="quiz-a">A: 年化波動率 = 1.0% × √252 ≈ 15.87%。無論樣本長度是 40 天還是 500 天，日度年化乘數永遠是 √252。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 21 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 21</span>
+    <h2 class="card-title">Markowitz 解析推導: 拉格朗日乘子法與四大常數 (A, B, C, D)</h2>
+    <span class="card-cat">數學推導精粹</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      在容許自由沽空的教科書世界裡，MVO 是一個帶等式約束的二次型極值問題。透過高等微積分拉格朗日乘子法對權重求偏導，可以提煉出四大標量常數（A, B, C, D），一筆過解出前緣上任意點的封閉式最優權重解析解！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 四大經典標量常數與最優權重向量 (THE FOUR MARKOWITZ SCALARS)</div>
+      <span class="math-code">A = 1^T C⁻¹ μ  ,   B = μ^T C⁻¹ μ  ,   C = 1^T C⁻¹ 1  ,   D = BC - A²</span>
+      <span class="math-code">前緣最優權重解: w* = [(B - A μ_req) / D] · C⁻¹ 1  +  [(C μ_req - A) / D] · C⁻¹ μ</span>
+      <div class="var-desc">• C: 協方差逆矩陣內積常數 | D = BC - A² 必須 > 0 (由柯西-施瓦茨不等式保證) | μ_req: 客戶要求的目標回報</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 效率前緣的拋物線雙曲線方程 (THE FRONTIER HYPERBOLA)</div>
+      在 (σ², μ) 平面上，效率前緣是嚴格的拋物線方程：<br>
+      <strong>σ_p² = (C μ_p² - 2A μ_p + B) / D</strong>。其幾何頂點恰好就是全局最小方差組合（MVP）。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 成立前提陷阱 (THEORETICAL ASSUMPTION TRAP)</div>
+      上述優美的解析解能夠成立，<strong>完全依賴於「無約束（Unconstrained）」假設</strong>，即允許權重為任意負數（無限賣空）且協方差矩陣 C 嚴格非奇異可逆。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 標量常數 C = 1^T C⁻¹ 1 在幾何與金融物理意義上代表甚麼？</div>
+      <div class="quiz-a">A: 常數 C 是全局最小方差組合（MVP）方差的倒數！即 σ²_mvp = 1 / C。C 越大，代表全市場可實現的最小組合風險越低。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 22 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 22</span>
+    <h2 class="card-title">全局最小方差組合 (MVP): 解析解 w_mvp = C⁻¹ 1 / C</h2>
+    <span class="card-cat">前緣極值鼻尖</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      全局最小方差組合（MVP）位於 Markowitz 子彈圖的最左端鼻尖。它完全不管能賺多少錢，純粹追求全世界最小的總方差。在解析上，它完全不受預期回報 μ 的影響，權重完全由協方差逆矩陣 C⁻¹ 決定！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 MVP 封閉式解析三部曲 (MVP CLOSED-FORM SOLUTION)</div>
+      <span class="math-code">最優權重: w_mvp = (C⁻¹ 1) / (1^T C⁻¹ 1) = (C⁻¹ 1) / C</span>
+      <span class="math-code">最小方差: σ²_mvp = 1 / C  ⟹  最小波動率: σ_mvp = 1 / √C</span>
+      <span class="math-code">對應預期收益: μ_mvp = A / C</span>
+      <div class="var-desc">• 1: 全 1 向量 | C = 1^T C⁻¹ 1 (矩陣 C⁻¹ 的所有元素之和) | A = 1^T C⁻¹ μ</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 機構工程價值 (ENGINEERING SIGNIFICANCE)</div>
+      由於預期收益率 μ 的估計誤差是協方差矩陣 C 的數十倍，在不確定性極高的危機時刻，MVP 拋棄了 μ 的估計，成為實盤最穩健的配置起點。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 效率前緣的有效上半支 (EFFICIENT UPPER BRANCH)</div>
+      Markowitz 子彈圖在 MVP 之下的下半支被稱為<strong>無效支（Inefficient Branch）</strong>。理性投資者只會在 MVP 及其以上的上半支進行選擇。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若已知 Markowitz 常數 A = 12, B = 2.5, C = 100，求 MVP 的預期收益與最小標準差。</div>
+      <div class="quiz-a">A: 預期收益 μ_mvp = A / C = 12 / 100 = 12.0%；最小標準差 σ_mvp = 1 / √C = 1 / √100 = 1 / 10 = 10.0%。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 23 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 23</span>
+    <h2 class="card-title">不等式約束之牆: 純做多瓦解解析解，轉入數值優化 (LCQP &amp; SLSQP)</h2>
+    <span class="card-cat">真實約束轉折</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      當我們加入最基本的真實約束<strong>「不准賣空（w_i ≥ 0）」</strong>，數學世界天崩地裂！等式微積分徹底失效，問題變成了帶有不等式約束的二次規劃（LCQP）。<strong>世界上再沒有任何簡潔的代數公式能一筆過算出權重</strong>，我們必須依賴數值優化器迭代逼近求解！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 線性約束二次規劃 (LINEARLY CONSTRAINED QUADRATIC PROGRAM, LCQP)</div>
+      <span class="math-code">min_w  (1/2) w^T C w   subject to:  1^T w = 1  ,  μ^T w ≥ μ_req  ,  w_i ≥ 0 (∀ i)</span>
+      <div class="var-desc">• 必須滿足 Karush-Kuhn-Tucker (KKT) 不等式最優性條件 | 需要借用 Excel GRG Nonlinear 或 Python SLSQP</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 為什麼必須禁止賣空？(WHY ENFORCE W_I ≥ 0)</div>
+      未約束的解析公式計算出來的權重幾乎必定包含極端的負數（比如 -250% 沽空股票 X，+350% 做多股票 Z）。在真實市場中，這會因追加保證金與融券限制直接導致基金爆倉。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 不等式約束的代價 (THE COST OF NON-NEGATIVITY)</div>
+      純做多約束縮小了可行解的空間，因此<strong>受約束效率前緣相較於無約束前緣會向右下方收縮</strong>（同等回報下波動率略高），但換來了實盤生存的安全性。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼拉格朗日乘子法無法直接求解帶有 w_i ≥ 0 約束的 Markowitz 問題？</div>
+      <div class="quiz-a">A: 因為經典拉格朗日乘子法只適用於等式約束（Equality Constraints）。不等式約束會使約束邊界處於「激活（Active）」與「未激活（Inactive）」的動態切換，需使用 KKT 條件或數值迭代算法。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 24 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 24</span>
+    <h2 class="card-title">Excel Solver 與 SolverTable: 矩陣二次型 MMULT 與前緣掃描</h2>
+    <span class="card-cat">Excel 工程實現</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      在 Excel 裡實現 Markowitz 優化，核心是利用 <strong>MMULT</strong> 矩陣相乘寫出二次型組合方差，再用 <strong>Solver</strong> 尋求 GRG 非線性最小解。要畫出整條光滑的效率前緣，則需要使用 <strong>SolverTable</strong> 插件將目標回報（如 10% 到 14%）自動批處理掃描。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 EXCEL 核心公式與 SOLVER 設置 (`EFFICIENTFRONTIER3STOCKS.XLSX`)</div>
+      <span class="math-code">組合方差公式 (B21): =MMULT(Invested, MMULT(CovarMat, TRANSPOSE(Invested)))</span>
+      <div class="var-desc">
+        • Changing Cells: `Invested` (權重 B15:D15) | 協方差矩陣: σ_ij = ρ_ij · σ_i · σ_j<br>
+        • Constraints: `TotInvested = 1` (E15 = 1) ; `PortExpReturn >= ReqdReturn` (B19 >= D19) ; 勾選 `Make Unconstrained Variables Non-Negative`<br>
+        • SolverTable: 設置目標回報從 10% 到 14% (步長 0.5%)，自動輸出報告工作表 `STS_1` 繪製前緣圖。
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 課堂數值結果 (CLASSROOM CONVERGENCE)</div>
+      當目標回報 μ_req = 12% 時，Solver 迅速收斂至：股票 X 權重 50%、股票 Y 權重 0%、股票 Z 權重 50%，組合標準差為 12.0%。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 矩陣輸入維度陷阱 (MMULT DIMENSION TRAP)</div>
+      在 Excel 舊版本中輸入 MMULT 矩陣乘法時，若矩陣行列維度不匹配（非 1×N 乘 N×N 乘 N×1）會直接報 `#VALUE!` 錯誤。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼在 Excel 求解最大夏普切點組合時不需要設定目標回報約束？</div>
+      <div class="quiz-a">A: 因為最大夏普切點組合是唯一的！直接將目標單元格設為 Maximize Sharpe Ratio，由 Solver 自主調整權重直至找到最高斜率切點。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 25 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 25</span>
+    <h2 class="card-title">資本市場線 (CML) 與唯一切點資本市場組合 (CMP)</h2>
+    <span class="card-cat">切點組合極限</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      當我們引入年息保證的無風險國債利率 R_f，投資者可以將資金在國債和任意風險資產之間配比。連線的斜率就是夏普比率。<strong>將射線向上旋轉至與 Markowitz 效率前緣相切的唯一最高點，就是全市場最強切點組合——資本市場組合（CMP）！</strong>
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 資本市場線 (CML) 與 CMP 解析權重 (THE CML EQUATION)</div>
+      <span class="math-code">CML 方程: μ_combo = R_f + [(μ_cmp - R_f) / σ_cmp] · σ_combo</span>
+      <span class="math-code">解析切點權重 (Shorts Allowed): w_cmp = [C⁻¹ (μ - R_f 1)] / [1^T C⁻¹ (μ - R_f 1)]</span>
+      <div class="var-desc">• 斜率項即為最大夏普比率 Sharpe_max | 任何結合了國債的組合都在 CML 這條直線上</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 幾何壓制支配 (GEOMETRIC DOMINANCE)</div>
+      因為直線 CML 嚴格切於且<strong>完全壓在彎曲的 Markowitz 效率前緣上方</strong>，所以在任何波動率水平下，購買「CMP + 現金」的預期回報嚴格大於購買前緣上的純股票組合！
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 借貸利率對稱性陷阱 (SYMMETRIC BORROWING ASSUMPTION)</div>
+      教科書 CML 假設投資者可以用無風險利率 R_f 無限借錢加槓桿買 CMP。但在現實中，散戶/機構融資借款利率 R_borrow 顯著高於 R_f，導致 CML 在切點右側向下折彎（Kinked CML）。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼說 CML 的斜率是全市場所有可行風險資產組合中最高的夏普比率？</div>
+      <div class="quiz-a">A: 幾何上，從點 (0, R_f) 出發引向可行集的射線中，與效率前緣相切的線斜率最大。由於射線斜率定義為 Δμ / Δσ = (μ - R_f)/σ，切點的夏普比率必然達到全域極大值。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 26 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 26</span>
+    <h2 class="card-title">托賓兩基金分離定理: 技術優化 vs 客戶融資 (Two-Fund Separation)</h2>
+    <span class="card-cat">經典組合架構</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      諾貝爾獎得主 Tobin 證明了資產管理的「大分工定理」：<strong>投資決策被完美解耦為兩步獨立工程！</strong> 第一步是客觀純量化工程（尋找唯一最大 Sharpe 的切點 CMP）；第二步是個性化融資決策（根據客戶膽量，在國債與 CMP 之間分拆資金）。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 兩步決策流水線 (TWO-STEP DECISION PIPELINE)</div>
+      <span class="math-code">第一步 (技術工程 Technical): 對所有客戶構建完全相同的單一切點組合 CMP (Max Sharpe)</span>
+      <span class="math-code">第二步 (融資配比 Financing): 組合權重 = w_cmp · CMP + (1 - w_cmp) · Cash</span>
+      <div class="var-desc">
+        • 保守客戶 (Risk-Averse): 50% 現金 + 50% CMP (低風險，位於 CML 左半段)<br>
+        • 中度客戶 (Moderate): 0% 現金 + 100% CMP (純持切點組合)<br>
+        • 進攻客戶 (Aggressive): 融入資金借錢加槓桿買入 >100% CMP (位於 CML 右半段)
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 為什麼徹底擊敗傳統純股票配置？(DOMINANCE PROOF)</div>
+      傳統理財顧問會為保守客戶挑選前緣低回報的純股票組合。但兩基金分離定理證明：<strong>拿 50% 現金搭配 50% 高夏普 CMP，能在相同波動率下取得更高回報！</strong>
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 現金拖累陷阱 (CASH DRAG TRAP)</div>
+      許多經理直接在股票基金內部放 20% 閒置現金，導致收益被大幅稀釋。兩基金分離強調的是整體資產負債表的動態配置，而非被動沉澱死現金。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 根據兩基金分離定理，不同風險偏好的投資者在風險資產內部的配置比例是否有區別？</div>
+      <div class="quiz-a">A: 完全沒有區別！所有投資者持有的風險資產內部比例都嚴格等於切點組合 CMP 的權重比例。風險偏好差異僅體現在「現金 vs CMP」的資金劃分比例上。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 27 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 27</span>
+    <h2 class="card-title">生產級 Python 五大腳本架構拆解 (`scipy.optimize` SLSQP)</h2>
+    <span class="card-cat">Python 量化工程</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      當資產數量擴展至幾十隻，Excel 徹底罷工。Session 3 提供了 5 隻工業級 Python 腳本，全部基於 `scipy.optimize.minimize`。核心技巧包括：非負邊界 `(0, 1)`、最小化「負夏普比率（-Sharpe）」、以及查表破解二次約束（FlippedFake）。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 五大程式核心功能矩陣 (5 PRODUCTION PYTHON PROGRAMS)</div>
+      <table>
+        <tr><th>程式 Script</th><th>核心功能</th><th>優化器技巧 (SciPy Implementation)</th></tr>
+        <tr><td><strong>1. ClassicMarkowitz</strong></td><td>固定目標回報 (如 8%) 求解最小方差</td><td>`method='SLSQP'`, 約束 `TargetRet == 0.08`, 邊界 `(0, 1)`</td></tr>
+        <tr><td><strong>2. EfficientFrontier</strong></td><td>循環掃描繪製整條前緣圖 (輸出 `F2.pdf`)</td><td>`np.linspace(0.0, 0.25, 50)` 循環調用 SLSQP 繪圖</td></tr>
+        <tr><td><strong>3. MinVariancePort</strong></td><td>求解全局最小方差組合 (MVP)</td><td>純方差目標 `Variance(weights)`，無預期收益約束</td></tr>
+        <tr><td><strong>4. MaxSharpePort</strong></td><td>求解切點市場組合 (CMP)</td><td><strong>取負最小化技巧:</strong> `def Sharpe(w): return -portfolio(w)[2]`</td></tr>
+        <tr><td><strong>5. FlippedFake</strong></td><td>鎖死波動率 (如 σ ≤ 16%) 反求最高收益</td><td><strong>查表映射變通:</strong> 預先計算 50 點前緣表，匹配 σ=16% 處回報後調用程式 1</td></tr>
+      </table>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 為什麼程式 5 要叫 "FLIPPEDFAKE"？(ENGINEERING HACK)</div>
+      標準 `scipy.optimize` 缺少二次約束二次規劃（QCQP）求解器。當 Harry 提出「固定波動率求最大收益」的翻轉問題時，程式用了一種聰明的工程查表法變通解決。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 初值敏感性 (INITIAL GUESS SENSITIVITY)</div>
+      SLSQP 優化器需傳入初值 `x0 = no_assets * [1./no_assets,]`。若初值設定不當，可能陷入局部極值。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼在程式 4 求解最大夏普比率時必須把目標函數寫成 `-Sharpe`？</div>
+      <div class="quiz-a">A: 因為 `scipy.optimize.minimize` 在底層設計上只能尋求函數的「最小值（Minimization）」。極大化 f(x) 等價於極小化 -f(x)。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 28 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 28</span>
+    <h2 class="card-title">分散投資的漸近數學極限: lim σ_p² = Cov 與 15-30 隻資產黃金法則</h2>
+    <span class="card-cat">極限定理推導</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      將資金等權重分配到 N 隻股票（1/N），組合方差可嚴格展開。當 N 趨近於無窮大時，<strong>第一項（個股平均方差）被 1/N 徹底抹殺為零！但第二項收斂至全市場平均協方差 Cov</strong>。這證明特異風險可以免費消除，但宏觀大市共振無處可逃！
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 漸近極限定理展開推導 (ASYMPTOTIC LIMIT PROOF)</div>
+      <span class="math-code">σ_p² = (1/N) σ̄² + [(N - 1)/N] Cov̄ = (1/N) (σ̄² - Cov̄) + Cov̄</span>
+      <span class="math-code">當 N ⟶ ∞ 時:  lim_{N ⟶ ∞} σ_p² = 0 · (σ̄² - Cov̄) + 1 · Cov̄ = Cov̄</span>
+      <div class="var-desc">• σ̄²: 全體資產的平均方差 | Cov̄: 全體資產對的平均協方差 | 殘留項 Cov̄ 即為不可分散的系統性風險底線</div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 15 到 30 隻資產甜點區 (THE 15–30 ASSET SWEET SPOT)</div>
+      • N = 15 隻資產已吸收約 <strong>90%</strong> 的分散化好處；<br>
+      • N = 30 隻資產吸收約 <strong>95%</strong>；<br>
+      • 超過 50 隻資產後，邊際風險降低效果近乎為零，反而增加交易手續費與跟蹤成本。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 信用債券違約例外 (THE CREDIT DEFAULT EXCEPTION)</div>
+      上述定理適用於常態分佈股票；但在<strong>高收益信用債（Corporate Bonds）</strong>中，由於違約是小概率巨災事件（肥尾尾部風險），需要持有數百隻債券才能有效分散違約風險。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 若某市場平均方差 σ̄² = 400，平均協方差 Cov̄ = 100，持有 10 隻股票的組合方差是多少？</div>
+      <div class="quiz-a">A: σ_p² = (1/10) × 400 + (9/10) × 100 = 40 + 90 = 130。已將原本 400 的個股方差大幅削減了 67.5%！</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 29 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 29</span>
+    <h2 class="card-title">協方差奇異性世紀困境: T ≥ 1/2 N(N+1) 與短動量窗口的生死衝突</h2>
+    <span class="card-cat">維度災難困境</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      量化金融的核心世紀大衝突：矩陣求逆經驗法則要求觀測天數 <strong>T ≥ 1/2 N(N+1)</strong>。若跟隨動量法則縮短窗口（T = 66 個交易日），<strong>資產數量 N 被死死卡在 11 隻之內</strong>！但充分分散投資又要求至少持有 15–30 隻資產！魚與熊掌如何兼得？
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 自由度條件與衝突方程 (THE CONFLICT EQUATION)</div>
+      <span class="math-code">非奇異矩陣經驗法則: T_obs ≥ (1/2) N (N + 1)</span>
+      <div class="var-desc">
+        • 若 N = 11: T ≥ (1/2)(11)(12) = <strong>66 個交易日 (~3 個月)</strong> ⟹ 完美適配短動量窗口！<br>
+        • 若 N = 30: T ≥ (1/2)(30)(31) = <strong>465 個交易日 (~2 年)</strong> ⟹ 窗口過長，動量退化為均值回歸！<br>
+        • 世紀衝突: <strong>短動量窗口 (T ≤ 60)</strong> vs <strong>充分分散資產數量 (N ≥ 30)</strong> 發生嚴重數學碰撞！
+      </div>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 奇異矩陣的數學後果 (WHAT HAPPENS IF SINGULAR)</div>
+      當 N ≥ T 時，樣本協方差矩陣 C 秩虧損（Rank-Deficient），行列式 det(C) = 0，矩陣無法求逆。優化器會拋出奇異矩陣報警，算出的權重極度發散。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 盲目擴大股票池陷阱 (THE LARGE UNIVERSE TRAP)</div>
+      很多新手在 3 個月回測窗口中放進標普 500 的 500 隻股票，矩陣自由度嚴重不足，結果全是虛假噪聲。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼採用 66 個交易日的短期動量窗口最多只能容納 11 隻單獨股票？</div>
+      <div class="quiz-a">A: 因為 11 隻資產的對稱協方差矩陣需要估計 11 + (11×10)/2 = 66 個獨立參數。當 T < 66 時，樣本觀測量少於待估參數個數，矩陣必然奇異不可逆。</div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 30 -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num badge-s3">S3 • CARD 30</span>
+    <h2 class="card-title">四大工業級奇異性解法與三大客戶委託實戰</h2>
+    <span class="card-cat">工業級破局落實</span>
+  </div>
+  <div class="card-body">
+    <div class="block block-intuition">
+      <div class="block-label">⚡ 30秒極速直覺 (INTUITION)</div>
+      面對矩陣奇異性衝突，華爾街有四大機構級奇招破局：<strong>11 隻行業板塊 ETF、Critical Line Algorithm (CLA)、Higham 正定投影修復、以及 1/N 備用降級</strong>。在 HWK 實戰中，精確對接保守型（Case 2）、平衡型（Case 1+CML）與進攻型（Case 3）客戶。
+    </div>
+    <div class="block block-formula">
+      <div class="block-label">📐 四大破局奇招與三大客戶調用方案 (SOLUTIONS & HWK MANDATES)</div>
+      <table>
+        <tr><th>四大工業級破局奇招</th><th>第三課大作業三大客戶方案 (Part 2 HWK)</th></tr>
+        <tr><td><strong>1. 11 隻板塊 ETF (Sector ETFs):</strong> N=11 滿足 T=66，ETF 內部自帶數百隻個股充分分散！</td><td><strong>客戶 A (保守極度怕輸，波動率硬上限 15%):</strong><br>調用 <strong>Case 2 (`ef.efficient_risk(0.15)`)</strong> Flipped Markowitz，鎖死波動率追求最高回報。</td></tr>
+        <tr><td><strong>2. 臨界線算法 (CLA):</strong> Markowitz &amp; Todd 原創，分段追蹤轉角組合，<strong>全程無需矩陣求逆</strong>！</td><td><strong>客戶 B (要求大市回報，堅持配固定比例國債/現金):</strong><br>調用 <strong>Case 1 (`ef.max_sharpe()`) + Cash</strong>，利用 CML 線性混搭，全面擊敗帶現金拖累的平庸基金。</td></tr>
+        <tr><td><strong>3. Higham 正定投影 (`posdef.py`):</strong> SVD 奇異值分解，將病態矩陣投影回對稱正定錐。</td><td><strong>客戶 C (進攻激進，零現金，最大化資本增長):</strong><br>調用 <strong>Case 3 (`ef.efficient_return()`)</strong>，前緣頂端全倉押注最高動量板塊。</td></tr>
+        <tr><td><strong>4. 1/N 等權重降級 (Fallback):</strong> 條件數爆表時自動退守 1/N 避險。</td><td><strong>基準對標 (Benchmark):</strong><br>2009–2020 11 年後次貸標普 SPY / 道指 DIA 長期基準回測對標。</td></tr>
+      </table>
+    </div>
+    <div class="block block-constraint">
+      <div class="block-label">💡 臨界線算法 (CLA) 的不可替代性</div>
+      在 Keller 論文中，N = 39 個資產且 T = 12 個月，標準矩陣求逆完全癱瘓，CLA 是唯一能在數學上精確保證輸出真實效率前緣的優雅算法。
+    </div>
+    <div class="block block-trap">
+      <div class="block-label">⚠️ 實務約束綜合 (SYNTHESIS WARNING)</div>
+      真實資產管理中，不存在單一通吃的萬能模型。經理人職責是精確診斷客戶約束、數據長度與市場狀態，挑選合適的優化工具箱。
+    </div>
+    <div class="block block-quiz">
+      <div class="block-label">🧠 極速自測閃卡 (MICRO FLASHCARD)</div>
+      <div class="quiz-q">Q: 為什麼配置 11 隻行業板塊 ETF 是破解「短窗口 vs 充分分散」衝突的最簡潔實用方案？</div>
+      <div class="quiz-a">A: 因為 11 隻 ETF 在宏觀矩陣維度上 N=11，只需 66 個交易日即可滿足非奇異可逆條件；而在微觀資產層面，這 11 隻 ETF 覆蓋了標普 500 的全部 500 隻股票，完美兼顧了動量靈活性與極致分散性！</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================================================= -->
+<!-- MASTER HIGH-YIELD FORMULA MATRIX                                          -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-summary">
+  <div>
+    <div class="banner-title">全三課必背量化公式與結論對照矩陣 (Master Formula Matrix)</div>
+    <div class="banner-desc">Sessions 1, 2, and 3 核心指標、數學表達式、應用場景與實務天條速查表</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">MATRIX</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">講次</th>
+      <th style="width: 18%;">核心指標 / 定理</th>
+      <th style="width: 32%;">數學公式 / 表達式</th>
+      <th style="width: 38%;">實務意義與考試天條</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>特雷諾比率 (Treynor)</strong></td>
+      <td><code>T_p = (R_p - R_f) / β_p</code></td>
+      <td>每單位<strong>系統性市場風險 (β)</strong> 之超額回報。只適用於已充分分散的子組合 (Sub-portfolio)。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>夏普比率 (Sharpe)</strong></td>
+      <td><code>S_p = (R_p - R_f) / σ_p</code></td>
+      <td>每單位<strong>總波動率 (σ)</strong> 之超額回報。分母嚴厲懲罰未分散特異風險；適用於全副身家獨立組合 (Standalone)。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>詹森阿爾法 (Alpha)</strong></td>
+      <td><code>α_p = R_p - [R_f + β_p(R_m - R_f)]</code></td>
+      <td>剝離市場水漲船高後的真實選股超額能力。需回歸 t-stat > 2.0 (p &lt; 0.05) 方具統計顯著性。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>方差正交分解</strong></td>
+      <td><code>σ_p² = β_p² σ_m² + σ_ε²</code></td>
+      <td>總方差 = 系統性方差 + 非系統性方差。持有 30 隻股票可將 σ_ε² 免費消除，市場不為其支付溢價。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>信息比率 (IR)</strong></td>
+      <td><code>IR = (R_p - R_B) / σ_(R_p - R_B)</code></td>
+      <td>每單位主動跟蹤誤差 (Tracking Error) 之超額回報。機構養老金挑選股票基金核心指標 (IR > 0.5 良好)。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>Brinson 配置效應</strong></td>
+      <td><code>ΔA_i = (w_{p,i} - w_{B,i})(R_{B,i} - R_B)</code></td>
+      <td>宏觀大局觀：超配強勢板塊或低配弱勢板塊賺到的超額收益 (負負得正亦為正貢獻)。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 1</strong></td>
+      <td><strong>Brinson 選股效應</strong></td>
+      <td><code>ΔS_i = w_{p,i} · (R_{p,i} - R_{B,i})</code></td>
+      <td>微觀選股眼光：特定板塊內挑选之個股跑贏板塊基準的超額收益 (以實際權重 w_{p,i} 投入放大)。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 2</strong></td>
+      <td><strong>CAPM 一般均衡</strong></td>
+      <td><code>E[R_i] = R_f + β_i (R_m - R_f)</code></td>
+      <td>黑板三情境證明：國債 2% ⟶ 大市 8% ⟶ 進攻型 β=1.1 索取合理回報 8.6%。繪製於 SML 證券市場線上。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 2</strong></td>
+      <td><strong>五維量化選股</strong></td>
+      <td><code>[Low β] + [Value] + [Small] + [Illiquid] + [Mom]</code></td>
+      <td>基於低 Beta 異象與 Fama-French 多因子革命構建的終極超額收益篩選器。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 2</strong></td>
+      <td><strong>動量復興兩大解藥</strong></td>
+      <td><code>w_i ≥ 0  且  T ∈ [1, 12] 個月</code></td>
+      <td>徹底打破傳統 MVO 的 60 個月均值回歸陷阱與無約束賣空槓桿自爆。高中生 Harry 實證 CAGR 14.17%。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 2</strong></td>
+      <td><strong>CAA 非對稱約束</strong></td>
+      <td><code>0 ≤ w_{risk} ≤ 0.25 ; 0 ≤ w_{safe} ≤ 1.00</code></td>
+      <td>風險資產上限 25% 防暴雷；安全避險資產（國債、現金）不設上限，海嘯時 100% 撲向現金防守。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 2</strong></td>
+      <td><strong>3D 流形平滑山頂</strong></td>
+      <td><code>Select Smooth / Differentiable Summit</code></td>
+      <td>寧選平緩山頂，莫搶孤峰尖刺！具備可微容錯性，抵抗未來實盤市場參數漂移，杜絕過擬合。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>收益率線性公理</strong></td>
+      <td><code>μ_p = w^T μ (僅算術收益率成立)</code></td>
+      <td>組合優化一律嚴格採用百分比算術收益率；對數收益率在資產權重加權中非線性失效。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>波動率時間年化</strong></td>
+      <td><code>σ_ann = σ_daily × √252  (或 σ_mon × √12)</code></td>
+      <td>基於方差線性可加性；乘數代表採樣頻率，與歷史樣本長度 (N_obs ≥ 60) 完全無關。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>Markowitz 四大常數</strong></td>
+      <td><code>A = 1^T C⁻¹ μ , C = 1^T C⁻¹ 1 , D = BC - A²</code></td>
+      <td>拉格朗日乘子法封閉式推導效率前緣拋物線方程與任意最優權重向量 w*。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>全局最小方差 (MVP)</strong></td>
+      <td><code>w_mvp = C⁻¹ 1 / C  ,  σ²_mvp = 1 / C</code></td>
+      <td>效率前緣子彈圖鼻尖；最優權重僅取決於協方差矩陣 C，完全繞開最不穩定的預期收益 μ 估計。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>資本市場線 (CML)</strong></td>
+      <td><code>μ_combo = R_f + [(μ_cmp - R_f) / σ_cmp] · σ_combo</code></td>
+      <td>切點組合 CMP 混搭現金，直線斜率即最大夏普比率。CML 在幾何上全面壓制純股票前緣。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>兩基金分離定理</strong></td>
+      <td><code>1. Technical (CMP) + 2. Financing (Cash)</code></td>
+      <td>客觀技術優化唯一切點 CMP，個性化融資劃分現金比例。徹底擊敗帶有死現金拖累的普通基金。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>分散化極限定理</strong></td>
+      <td><code>lim_{N ⟶ ∞} σ_p² = Cov̄</code></td>
+      <td>個股特異方差衰減為零，殘留不可分散的市場平均協方差。15–30 隻資產足矣。</td>
+    </tr>
+    <tr>
+      <td><strong>Session 3</strong></td>
+      <td><strong>協方差奇異性條件</strong></td>
+      <td><code>T_obs ≥ (1/2) N (N + 1)</code></td>
+      <td>T=66 天窗口限制 N ≤ 11 隻資產；由 11 隻行業 ETF、Critical Line Algorithm (CLA) 或 Higham 投影破解。</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ========================================================================= -->
+<!-- 10-MINUTE COMMUTE SPRINT: ACTIVE-RECALL FLASHCARDS (PART 1: Q01 - Q10)     -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-quiz">
+  <div>
+    <div class="banner-title">通勤極速衝刺：20 題量化主動回憶閃卡 (Part 1: 考點 01–10)</div>
+    <div class="banner-desc">遮住答案進行自我測試，快速檢驗對第一至二課核心考點與真實約束的掌握程度</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">PART 1 (10 QUIZZES)</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 7px;">
+
+  <!-- Q1 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 01 • S1 績效評估</div>
+      <div class="quiz-q">Q: 為什麼經理收益率高於大市，Jensen's Alpha 仍可能嚴重為負？</div>
+      <div class="quiz-a">A: 因為經理持有高 Beta 槓桿（β > 1）。若牛市基準要求回報 R_f + β(R_m - R_f) 更高，實際收益未達標，Alpha 即為負。</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 02 • S1 SHARPE VS TREYNOR</div>
+      <div class="quiz-q">Q: 一個重倉單一暴雷生科股的經理，哪項指標會給予嚴厲懲罰？為什麼？</div>
+      <div class="quiz-a">A: Sharpe 比率！因為單股特異風險 σ_ε² 巨大，推高總標準差 σ_p；而 Treynor 只看 Beta，會忽視未分散特異風險。</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 03 • S1 BRINSON 歸因</div>
+      <div class="quiz-q">Q: 經理低配表現跑輸大市的板塊，其 Brinson 配置效應為正還是負？</div>
+      <div class="quiz-a">A: 為正！(w_p - w_B) &lt; 0 且 (R_B,i - R_B) &lt; 0，兩負數相乘為正數（負負得正），體現了防守性規避價值。</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 04 • S1 跟蹤誤差</div>
+      <div class="quiz-q">Q: 信息比率 (Information Ratio, IR) 分母的「跟蹤誤差」數學上代表甚麼？</div>
+      <div class="quiz-a">A: 代表主動超額收益的時間序列樣本標準差 σ_(R_p - R_B)，衡量經理偏離基準的超額回報穩定性。</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 05 • S1 夏普門檻</div>
+      <div class="quiz-q">Q: 某策略回測宣稱 Sharpe = 2.5，實盤最可能隱藏甚麼致命風險？</div>
+      <div class="quiz-a">A: 偷偷賣出深度虛值看跌期權（Short OTM Put，尾部暴雷風險）、非流動性資產人為平滑估值、或過度擬合（Overfitting）。</div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 06 • S2 MPT 誕生</div>
+      <div class="quiz-q">Q: Williams 股息折現模型在資產配置上的荒謬推論是甚麼？</div>
+      <div class="quiz-a">A: 忽視風險方差，導致投資者應將 100% 全部資金單押未來折現預期回報最高的一隻股票。</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 07 • S2 CAPM 黑板證明</div>
+      <div class="quiz-q">Q: 若國債 R_f = 2%, 大市 R_m = 8%，一隻 β = 1.1 的基金合理要價是多少？</div>
+      <div class="quiz-a">A: K_e = 2% + 1.1 × (8% - 2%) = 8.6%。額外 0.6% 是對多承擔 10% 系統性風險的精確補償。</div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 08 • S2 MVO 傳統失敗</div>
+      <div class="quiz-q">Q: 為什麼 36–60 個月歷史窗口會讓傳統 MVO 變成「接火棒機器」？</div>
+      <div class="quiz-a">A: 因為 3–5 年尺度資產具有強烈「均值回歸」，模型在歷史最高位買入過去贏家，隨後迎來估值大幅修復下跌。</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 09 • S2 KELLER 動量解藥</div>
+      <div class="quiz-q">Q: 拯救 Markowitz 模型的兩大核心解藥分別是甚麼？</div>
+      <div class="quiz-a">A: 1. 強制純做多 (w_i ≥ 0) 杜絕沽空槓桿；2. 將估計窗口縮短為 1 至 12 個月捕捉動量持續性。</div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 10 • S2 HARRY 抄底機制</div>
+      <div class="quiz-q">Q: Harry 模型在 2009 年 5 月底如何實現從避險切換至 90% SPY 抄底？</div>
+      <div class="quiz-a">A: 4 個月滾動收益檢測到美股 SPY 動量轉正且波動率下降，在滿足 TV ≤ 10% 約束下，優化器迅速將權重翻轉為進攻態。</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-break"></div>
+
+<!-- ========================================================================= -->
+<!-- 10-MINUTE COMMUTE SPRINT: ACTIVE-RECALL FLASHCARDS (PART 2: Q11 - Q20)     -->
+<!-- ========================================================================= -->
+<div class="section-banner banner-quiz">
+  <div>
+    <div class="banner-title">通勤極速衝刺：20 題量化主動回憶閃卡 (Part 2: 考點 11–20)</div>
+    <div class="banner-desc">遮住答案進行自我測試，快速檢驗對第二至三課量化推導、奇異性與實戰方案的掌握程度</div>
+  </div>
+  <div style="font-weight: 800; font-size: 10.5pt;">PART 2 (10 QUIZZES)</div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 7px;">
+
+  <!-- Q11 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 11 • S2 平滑山頂法則</div>
+      <div class="quiz-q">Q: 為什麼優化參數時要選「平滑山頂」而避開數值更高的「尖銳刺針」？</div>
+      <div class="quiz-a">A: 平滑山頂具備可微容錯性，參數實盤輕微漂移時表現平穩；尖銳刺針 100% 是過度擬合假象，實盤稍有偏差立即暴跌。</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 12 • S2 多因子互補</div>
+      <div class="quiz-q">Q: 為什麼價值因子 (Value) 與動量因子 (Momentum) 常常負相關卻能強烈互補？</div>
+      <div class="quiz-a">A: 價值因子賺取均值回歸溢價，動量因子賺取趨勢慣性溢價。兩者週期錯位，結合後大幅平滑跨週期淨值曲線。</div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 13 • S3 收益率公理</div>
+      <div class="quiz-q">Q: 為什麼在計算投資組合加權回報時嚴禁使用對數收益率？</div>
+      <div class="quiz-a">A: 因為組合收益等於加權平均僅在算術百分比收益率下線性成立 (μ_p = w^T μ)；對數函數具有非線性凹性，會造成數學扭曲。</div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 14 • S3 波動率年化</div>
+      <div class="quiz-q">Q: 若用過去 30 天日度數據計出方差，年化時應該乘以 30 還是 252？</div>
+      <div class="quiz-a">A: 必須乘以 252！252 代表日度採樣頻率，與使用的歷史樣本長度（30 天）完全無關。</div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 15 • S3 全局最小方差</div>
+      <div class="quiz-q">Q: MVP 的最優權重解析解 w_mvp = C⁻¹ 1 / C 為什麼特別抗造？</div>
+      <div class="quiz-a">A: 因為它完全不需要輸入預期收益率向量 μ，完全避開了預期收益率巨大的樣本外估計誤差。</div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 16 • S3 兩基金分離</div>
+      <div class="quiz-q">Q: 為什麼「50% 現金 + 50% CMP」優於前緣同等波動率的純股票組合？</div>
+      <div class="quiz-a">A: 幾何上直綫 CML 嚴格處於彎曲效率前緣的上方，在相同波動率下，CML 組合的預期回報嚴格更高（Sharpe 最大）。</div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 17 • S3 分散化極限</div>
+      <div class="quiz-q">Q: 為什麼當 N 趨向無窮大時，股票組合方差不會變成零？</div>
+      <div class="quiz-a">A: 因為不可分散的市場平均協方差 Cov̄ 始終存在，全體股票共同受宏觀經濟共振影響，極限為 lim σ_p² = Cov̄。</div>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 18 • S3 臨界線算法 (CLA)</div>
+      <div class="quiz-q">Q: 為什麼臨界線算法 (CLA) 能在資產數 N > 觀測數 T 時依然求解前緣？</div>
+      <div class="quiz-a">A: 因為 CLA 將資產劃分為入集 (IN)、上限 (UP)、下限 (DN)，分段追蹤轉角組合，全程無需對整個奇異矩陣求逆！</div>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 19 • S3 協方差奇異性</div>
+      <div class="quiz-q">Q: 採用 66 天短期動量窗口時，如何既保證不發生矩陣奇異又實現充分分散？</div>
+      <div class="quiz-a">A: 配置 11 隻行業板塊 ETF（如 XLK, XLF）。宏觀維度 N=11 滿足 T ≥ 66；微觀層面 11 隻 ETF 自帶標普 500 隻股票的完全分散。</div>
+    </div>
+  </div>
+
+  <!-- Q20 -->
+  <div class="card" style="margin-bottom: 0;">
+    <div class="block block-quiz">
+      <div class="block-label">閃卡 20 • S3 客戶方案實戰</div>
+      <div class="quiz-q">Q: 客戶 A (要求波動率 ≤ 15%) 為什麼在 Part 2 HWK 必須使用 Case 2 (Flipped Markowitz)？</div>
+      <div class="quiz-a">A: 因為客戶施加了硬性二次風險約束 w^T C w ≤ (0.15)²。Case 2 鎖死風險預算上限，將預期收益推向該邊界上的最大值。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="doc-footer">
+  APS1051: Portfolio Management under Real Market Constraints • University of Toronto ELITE Program<br>
+  Prepared for ChunKit Poon (潘俊傑) • Micro-Learning Study Guide (Sessions 1 to 3) • Generated for Mobile / Commute / Exam Sprint
+</div>
+
+</body>
+</html>

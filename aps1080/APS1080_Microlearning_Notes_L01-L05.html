@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>APS1080 碎片化學習隨身手冊 · L01~L05 精華速查與微自測</title>
+<link rel="stylesheet" href=".katex/katex.min.css">
+<script src=".katex/katex.min.js"></script>
+<script src=".katex/auto-render.min.js"></script>
+<style>
+  @page {
+    size: A4;
+    margin: 11mm 12mm 12mm 12mm;
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font-size: 8pt;
+      color: #64748b;
+    }
+  }
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.48;
+    font-size: 9.3pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header Banner */
+  .header-banner {
+    background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 50%, #0369a1 100%);
+    color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-banner h1 {
+    font-size: 15pt;
+    margin: 0 0 3px 0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .header-banner .subtitle {
+    font-size: 9.5pt;
+    color: #93c5fd;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+  }
+
+  .header-banner .meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    font-size: 8pt;
+  }
+
+  .badge {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  /* Guide Box */
+  .guide-box {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 8.5pt;
+    color: #475569;
+    break-inside: avoid;
+  }
+
+  .guide-box strong {
+    color: #0f172a;
+  }
+
+  /* Section Title */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 8px 0;
+    padding-bottom: 3px;
+    border-bottom: 2px solid #e2e8f0;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .section-tag {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 8pt;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  /* Lecture Themes */
+  .theme-l01 { background-color: #2563eb; }
+  .theme-l02 { background-color: #059669; }
+  .theme-l03 { background-color: #d97706; }
+  .theme-l04 { background-color: #dc2626; }
+  .theme-l05 { background-color: #7c3aed; }
+  .theme-summary { background-color: #0f172a; }
+
+  /* Concept Card */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    padding: 10px 13px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+  }
+
+  .card-l01 { border-left: 4px solid #2563eb; }
+  .card-l02 { border-left: 4px solid #059669; }
+  .card-l03 { border-left: 4px solid #d97706; }
+  .card-l04 { border-left: 4px solid #dc2626; }
+  .card-l05 { border-left: 4px solid #7c3aed; }
+  .card-summary { border-left: 4px solid #0f172a; }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .card-num {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+  }
+
+  .card-time {
+    font-size: 7.5pt;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* Card Elements */
+  .formula-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 6px 8px;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .formula-label {
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: #475569;
+    text-align: left;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .intuition-box {
+    background: #eff6ff;
+    border-left: 3px solid #3b82f6;
+    padding: 6px 9px;
+    border-radius: 0 4px 4px 0;
+    margin: 5px 0;
+    font-size: 8.5pt;
+    color: #1e3a8a;
+  }
+
+  .intuition-box.green {
+    background: #f0fdf4;
+    border-left-color: #22c55e;
+    color: #14532d;
+  }
+
+  .intuition-box.amber {
+    background: #fffbeb;
+    border-left-color: #f59e0b;
+    color: #78350f;
+  }
+
+  .intuition-box.red {
+    background: #fef2f2;
+    border-left-color: #ef4444;
+    color: #7f1d1d;
+  }
+
+  .intuition-box.purple {
+    background: #faf5ff;
+    border-left-color: #a855f7;
+    color: #581c87;
+  }
+
+  .slogan {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 5px 0;
+  }
+
+  .contrast-col {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 8pt;
+    line-height: 1.42;
+  }
+
+  .contrast-col strong {
+    color: #0f172a;
+    display: block;
+    margin-bottom: 2px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 2px;
+  }
+
+  .trap-box {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: 4px;
+    padding: 5px 8px;
+    margin: 5px 0;
+    font-size: 8pt;
+    color: #9f1239;
+    line-height: 1.42;
+  }
+
+  .trap-box strong {
+    color: #881337;
+  }
+
+  .recall-box {
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 6px 9px;
+    margin-top: 6px;
+    font-size: 8pt;
+  }
+
+  .recall-q {
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .recall-a {
+    color: #475569;
+    border-left: 2px solid #cbd5e1;
+    font-size: 8pt;
+    margin-top: 3px;
+    background: #ffffff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    line-height: 1.4;
+  }
+
+  /* Comparison Table */
+  table.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+    margin: 6px 0;
+    background: #ffffff;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  table.compare-table th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 5px 7px;
+    text-align: left;
+    border: 1px solid #334155;
+  }
+
+  table.compare-table td {
+    padding: 5px 7px;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+    line-height: 1.38;
+  }
+
+  table.compare-table tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .katex {
+    font-size: 1.01em !important;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== PAGE 1 ==================== -->
+  <div class="header-banner">
+    <h1>APS1080 強化學習 · 碎片化學習隨身手冊 (L01~L05)</h1>
+    <div class="subtitle">Microlearning Pocket Cards · 核心公式 · 物理直覺 · 考點避坑 · 30秒微自測</div>
+    <div class="meta-badges">
+      <span class="badge">📖 範圍：Sutton & Barto Ch 1–6, 9</span>
+      <span class="badge">🎯 目標：Cumulative Test A 核心考點</span>
+      <span class="badge">⏱️ 單張卡片閱讀時間：2–3 分鐘</span>
+      <span class="badge">🧠 模式：主動召回 (Active Recall)</span>
+    </div>
+  </div>
+
+  <div class="guide-box">
+    <strong>💡 碎片化學習操作指引 (S-A-R-C 閉環)</strong>：
+    零散時間（通勤/排隊/午休）每次只讀 <strong>1 張原子卡片</strong>。
+    讀完後請<strong>遮住下方「30秒微自測答案」</strong>，嘗試在大腦中自述回答。能清晰講出直覺與公式項，即算完成單點掌握！
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag theme-summary">全景骨架</span>
+    <h2 class="section-title">Part 0: RL 四大經典範式全景對照表 (The Grand Comparison)</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width: 14%;">維度 / 特徵</th>
+        <th style="width: 21%;">動態規劃 (DP, Ch 4)</th>
+        <th style="width: 21%;">蒙地卡羅 (MC, Ch 5)</th>
+        <th style="width: 22%;">時序差分 (TD, Ch 6)</th>
+        <th style="width: 22%;">函數逼近 (Approx, Ch 9)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>模型需求 (Model)</strong></td>
+        <td><strong>必須</strong> 完整 $p(s', r \mid s, a)$</td>
+        <td><strong>無須</strong> (Model-Free 體驗)</td>
+        <td><strong>無須</strong> (Model-Free 體驗)</td>
+        <td><strong>無須</strong> (Model-Free 體驗)</td>
+      </tr>
+      <tr>
+        <td><strong>自力更生 (Bootstrap)</strong></td>
+        <td><strong>是</strong> (借用後續估值 $v(s')$)</td>
+        <td><strong>否</strong> (僅用真實總回報 $G_t$)</td>
+        <td><strong>是</strong> (借用即時估值 $V(S_{t+1})$)</td>
+        <td><strong>是 / 否</strong> (視乎 TD 或 MC 目標)</td>
+      </tr>
+      <tr>
+        <td><strong>抽樣機制 (Sampling)</strong></td>
+        <td><strong>全寬度期望 (Expectation)</strong></td>
+        <td><strong>整條隨機軌跡抽樣</strong></td>
+        <td><strong>單步遷移抽樣 $(S, A, R, S')$</strong></td>
+        <td>在線隨機抽樣梯度</td>
+      </tr>
+      <tr>
+        <td><strong>更新時機 (Timing)</strong></td>
+        <td>全空間離線掃描 (Sweeps)</td>
+        <td>回合結束後 (Episodic 結算)</td>
+        <td><strong>每一步在線 (Online step)</strong></td>
+        <td>每一步在線更新參數 $\mathbf{w}$</td>
+      </tr>
+      <tr>
+        <td><strong>方差與偏差 (Bias/Var)</strong></td>
+        <td>零方差 (全期望)，有估值偏差</td>
+        <td><strong>零偏差 (Unbiased)</strong>，高方差</td>
+        <td>低方差，有單步估值偏差</td>
+        <td>受參數容量限制，存在近似誤差</td>
+      </tr>
+      <tr>
+        <td><strong>核心更新目標</strong></td>
+        <td>$\sum_{s', r} p [r + \gamma v(s')]$</td>
+        <td>$G_t = \sum_{k=0}^T \gamma^k R_{t+k+1}$</td>
+        <td>$R_{t+1} + \gamma V(S_{t+1})$</td>
+        <td>$U_t$ (例如 $R + \gamma \hat{v}(S', \mathbf{w})$)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Card 1.1 -->
+  <div class="card card-l01">
+    <div class="card-head">
+      <div><span class="card-num">Card 1.1</span> <span class="card-title">RL 核心範式與評價性反饋 (Evaluative Feedback)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">核心目標 (Objective)</div>
+      $$\max_{\pi} \mathbb{E}_\pi \left[ G_t \right] = \max_{\pi} \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \right]$$
+    </div>
+    <div class="intuition-box">
+      <span class="slogan">💡 粵語金句：指導性係「比答案你抄」；評價性係「跌痛咗比個分數你」！</span>
+      監督學習像老師直接給標準答案（Instructive）；強化學習是 Agent 孤身丟入世界，做完動作後環境只反饋一個標量評分（Evaluative）。你永遠不知其他沒選的動作會不會更好，因此<strong>必須主動試錯</strong>！
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>Instructive (指導性 - SL)</strong>
+        告訴你正確動作 $a^*$ 是什麼。<br>
+        不需探索，直接梯度擬合標籤。
+      </div>
+      <div class="contrast-col">
+        <strong>Evaluative (評價性 - RL)</strong>
+        只評估當前動作有多好 ($R$)。<br>
+        <strong>必然引發 Exploration vs Exploitation！</strong>
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：為什麼純監督學習無法直接解決序列決策中的探索問題？</div>
+      <div class="recall-a"><strong>答案</strong>：監督學習仰賴外界提供正確動作標籤，但在未知環境中無人能預知每一步的最優決策；且眼前看似最優的動作，長遠可能導致災難性狀態（無信用分配能力）。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="section-header">
+    <span class="section-tag theme-l01">Lecture 1</span>
+    <h2 class="section-title">Foundations, Bandits & Finite MDPs (Chapters 1, 2, 3)</h2>
+  </div>
+
+  <!-- Card 1.2 -->
+  <div class="card card-l01">
+    <div class="card-head">
+      <div><span class="card-num">Card 1.2</span> <span class="card-title">即時回報 vs. 長期價值 (Reward vs. Value Function)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">狀態價值函數定義 (State-Value Function)</div>
+      $$v_\pi(s) \doteq \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] = \mathbb{E}_\pi \left[ \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \middle| S_t = s \right]$$
+    </div>
+    <div class="intuition-box">
+      <span class="slogan">💡 粵語金句：「Reward 係快感，Value 係前途！」</span>
+      通宵打機當下好爽（Reward = +100），但明天考試不及格（未來崩盤，Value 極低）；溫習很辛苦（即時 Reward = -10），但能保證順利畢業（長期 Value 極高）。RL Agent <strong>永遠追求最大化 Value，而非貪圖眼前 Reward</strong>。
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 折扣因子 $\gamma \in [0, 1)$ 考點避坑</strong>：
+      $\gamma=0$ 為極端短視（Myopic），只在乎 $R_{t+1}$；$\gamma \to 1$ 為遠見卓識（Far-sighted）。在無終止狀態的持續性任務中，必須 $\gamma < 1$ 才能保證級數收斂。
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：$q_\pi(s, a)$ 與 $v_\pi(s)$ 的本質區別是什麼？兩者如何互相轉化？</div>
+      <div class="recall-a"><strong>答案</strong>：$v_\pi(s)$ 評估處於狀態 $s$ 遵循策略 $\pi$ 的期望回報；$q_\pi(s, a)$ 鎖定了第一步強制執行動作 $a$。轉化關係：$v_\pi(s) = \sum_a \pi(a \mid s) q_\pi(s, a)$。</div>
+    </div>
+  </div>
+
+  <!-- Card 1.3 -->
+  <div class="card card-l01">
+    <div class="card-head">
+      <div><span class="card-num">Card 1.3</span> <span class="card-title">多臂老虎機 (Bandits) 與探索策略 ($\epsilon$-greedy & UCB)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">增量式更新 & UCB (Upper Confidence Bound)</div>
+      $$Q_{n+1} = Q_n + \frac{1}{n} [R_n - Q_n], \quad A_t \doteq \arg\max_a \left[ Q_t(a) + c \sqrt{\frac{\ln t}{N_t(a)}} \right]$$
+    </div>
+    <div class="intuition-box">
+      <span class="slogan">💡 粵語金句：UCB 就係「樂觀面對未知」——越少碰的機器，潛力加分越多！</span>
+      $\epsilon$-greedy 是盲目拋硬幣探索；UCB 則是有目的探索。根號項代表<strong>不確定性半寬度</strong>：如果某個手柄很少拉（$N_t(a)$ 很小），不確定性很大，Agent 就優先試探它！
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>平穩環境 (Stationary)</strong>
+        收益分佈不隨時間改變。<br>
+        步長 $\alpha_n = \frac{1}{n}$（滿足收斂條件，逐步忘卻早期誤差）。
+      </div>
+      <div class="contrast-col">
+        <strong>非平穩環境 (Non-stationary)</strong>
+        收益分佈隨時間漂移。<br>
+        步長取常數 $\alpha \in (0, 1]$（<strong>指數衰減加權</strong>，重視最新經驗）。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：若某個動作從未被選擇過（$N_t(a) = 0$），UCB 會如何處理？</div>
+      <div class="recall-a"><strong>答案</strong>：分母為 0 使根號項趨向於 $+\infty$，UCB 會強制將所有未被探索過的動作優先執行一遍，確保覆蓋無遺漏。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 3 ==================== -->
+  <!-- Card 1.4 -->
+  <div class="card card-l01">
+    <div class="card-head">
+      <div><span class="card-num">Card 1.4</span> <span class="card-title">MDP 與 貝爾曼方程家族 (The Bellman Equations)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">貝爾曼期望與最優方程 (Expectation vs Optimality)</div>
+      $$v_\pi(s) = \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right]$$
+      $$v_*(s) = \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right]$$
+    </div>
+    <div class="intuition-box">
+      <span class="slogan">💡 粵語金句：貝爾曼方程就係「現在的一步 + 未來的所有折現」！</span>
+      把長遠累積期望拆解為兩部分：<strong>當前這一步的即時回報期望</strong>，加上<strong>下一狀態的折現期望價值</strong>。只要環境滿足馬可夫性質，此遞推關係嚴格成立！
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 數學本質區別（考試高頻考點）</strong>：
+      貝爾曼期望方程是<strong>線性方程組</strong>，可透過矩陣求逆 $(I - \gamma P_\pi)^{-1} R_\pi$ 得到精確解析解；貝爾曼最優方程含有 $\max$ 算子，是<strong>非線性方程組</strong>，無閉式解析解，必須用迭代法（DP / Q-learning）求解！
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：寫出動作價值貝爾曼最優方程 $q_*(s, a)$ 的展開式。</div>
+      <div class="recall-a"><strong>答案</strong>：$q_*(s, a) = \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \max_{a'} q_*(s', a') \right]$。</div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag theme-l02">Lecture 2</span>
+    <h2 class="section-title">Dynamic Programming & GPI (Chapter 4)</h2>
+  </div>
+
+  <!-- Card 2.1 -->
+  <div class="card card-l02">
+    <div class="card-head">
+      <div><span class="card-num">Card 2.1</span> <span class="card-title">動態規劃本質 (DP: Model-Based & Bootstrapping)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">迭代策略評估更新式 (Iterative Policy Evaluation)</div>
+      $$v_{k+1}(s) \leftarrow \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_k(s') \right] \quad \forall s \in \mathcal{S}$$
+    </div>
+    <div class="intuition-box green">
+      <span class="slogan">💡 粵語金句：「上帝視角 + 借用隔離位估值！」</span>
+      DP 假設手握宇宙完美圖紙 $p(s', r \mid s, a)$。Bootstrapping（自力更生）就是：評估當前格子的身價時，直接借用鄰居格子的現有身價來計算，一步步向外擴散收斂，不用親自走完一生！
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>Two-Array (雙陣列版本)</strong>
+        保留舊表 $v_k$，生成新表 $v_{k+1}$。<br>
+        嚴格符合數學遞推，但佔用雙倍記憶體。
+      </div>
+      <div class="contrast-col">
+        <strong>In-Place (原地更新單陣列)</strong>
+        直接在同一陣列上覆蓋數值。<br>
+        <strong>收斂速度快約一倍</strong>，省記憶體，且理論保證收斂！
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：動態規劃的「全寬度備份 (Full Backup)」是什麼意思？</div>
+      <div class="recall-a"><strong>答案</strong>：DP 在更新一個狀態時，窮舉了所有可能的動作和後續所有可能狀態的概率分支求期望，而非沿著單條隨機軌跡採樣。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 4 ==================== -->
+  <!-- Card 2.2 -->
+  <div class="card card-l02">
+    <div class="card-head">
+      <div><span class="card-num">Card 2.2</span> <span class="card-title">策略迭代 vs. 價值迭代 (Policy Iteration vs. Value Iteration)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">價值迭代單步更新式 (Value Iteration Backup)</div>
+      $$v_{k+1}(s) \leftarrow \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_k(s') \right]$$
+    </div>
+    <div class="intuition-box green">
+      <span class="slogan">💡 粵語金句：PI 係「做完一份卷徹底改到滿分」；VI 係「邊做邊偷看答案一步到位」！</span>
+      策略迭代（PI）在評估階段必須等到 $\Delta < \theta$ 完全收斂才做貪心改進；價值迭代（VI）則極具效率——評估階段只掃描 <strong>1 次</strong>，立刻套用貝爾曼最優方程取 $\max$，實質上就是截斷策略迭代！
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 策略改進定理 (Policy Improvement Theorem)</strong>：
+      若對所有狀態 $s$ 均有 $q_\pi(s, \pi'(s)) \ge v_\pi(s)$，則新策略必然全域不劣於舊策略：$v_{\pi'}(s) \ge v_\pi(s)$。若等號處處成立，則 $\pi$ 即為最優策略 $\pi^*$。
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：價值迭代終止後，如何從最終的價值函數 $v^*$ 提取出最優策略 $\pi^*$？</div>
+      <div class="recall-a"><strong>答案</strong>：透過一步前瞻（One-step Lookahead）貪心選取動作：$\pi^*(s) = \arg\max_a \sum_{s', r} p(s', r \mid s, a) [r + \gamma v^*(s')]$。</div>
+    </div>
+  </div>
+
+  <!-- Card 2.3 -->
+  <div class="card card-l02">
+    <div class="card-head">
+      <div><span class="card-num">Card 2.3</span> <span class="card-title">廣義策略迭代 (GPI) 與異步 DP (Asynchronous DP)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">GPI 雙重互鎖結構 (Evaluation $\longleftrightarrow$ Improvement)</div>
+      $$\pi_0 \xrightarrow{\text{評估}} v \xrightarrow{\text{改進}} \pi_1 \xrightarrow{\text{評估}} v \dots \implies (\pi^*, v^*)$$
+    </div>
+    <div class="intuition-box green">
+      <span class="slogan">💡 粵語金句：兩隻互相咬合嘅齒輪，彼此追趕最後喺最優點鎖定！</span>
+      評估讓價值逼近當前策略；改進把策略推離當前價值。幾乎所有 RL 算法（DP、MC、TD）本質上都是 GPI 的具體具現化，差別僅在於評估步長的長短與抽樣方式。
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>同步 DP (Synchronous)</strong>
+        嚴格按固定狀態索引順序，每輪掃描全空間所有狀態。
+      </div>
+      <div class="contrast-col">
+        <strong>異步 DP (Asynchronous)</strong>
+        允許按任意順序更新狀態，甚至優先更新貝爾曼誤差大的狀態（Prioritized Sweeping）。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：異步 DP 保證收斂到最優價值的必備條件是什麼？</div>
+      <div class="recall-a"><strong>答案</strong>：所有狀態都必須持續被選中更新無窮多次（即不可永久忽略任何一個狀態）。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 5 ==================== -->
+  <div class="section-header">
+    <span class="section-tag theme-l03">Lecture 3</span>
+    <h2 class="section-title">Monte Carlo Methods & Importance Sampling (Chapter 5)</h2>
+  </div>
+
+  <!-- Card 3.1 -->
+  <div class="card card-l03">
+    <div class="card-head">
+      <div><span class="card-num">Card 3.1</span> <span class="card-title">蒙地卡羅核心範式 (Model-Free + No Bootstrapping)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">增量式 MC 價值更新 (Incremental MC Update)</div>
+      $$V(S_t) \leftarrow V(S_t) + \alpha [G_t - V(S_t)]$$
+    </div>
+    <div class="intuition-box amber">
+      <span class="slogan">💡 粵語金句：「無說明書，落場真打一千場！」</span>
+      沒有轉移機率 $p$？直接進環境試錯！MC 不猜測中途價值（零 Bootstrapping），只認最後落袋為安的真實總回報 $G_t$。代價是<strong>必須等整局打完（Episodic）</strong>才能結算。
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 偏差與方差特性 (Bias vs. Variance)</strong>：
+      MC 估計是<strong>嚴格無偏的 (Zero Bias)</strong>，因為 $G_t$ 是真實回報；但具有<strong>極高方差 (High Variance)</strong>，因為整條軌跡包含大量隨機動作與狀態轉移，微小擾動會導致最終 $G_t$ 劇烈波動。
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：為什麼 MC 方法不能直接應用於持續性任務 (Continuing Tasks)？</div>
+      <div class="recall-a"><strong>答案</strong>：因為持續性任務沒有終結狀態（Terminal State），MC 永遠等不到一局完結來計算完整的 $G_t$。</div>
+    </div>
+  </div>
+
+  <!-- Card 3.2 -->
+  <div class="card card-l03">
+    <div class="card-head">
+      <div><span class="card-num">Card 3.2</span> <span class="card-title">首次訪問 vs. 每次訪問 (First-Visit vs Every-Visit MC)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">回報統計取樣原則 (Sample Averaging Rules)</div>
+      $$\text{First-Visit: 僅納入回合中狀態 } s \text{ 首次出現時的 } G_t \implies \text{嚴格 i.i.d. 無偏}$$
+    </div>
+    <div class="intuition-box amber">
+      <span class="slogan">💡 粵語金句：「專一純情（只認初見）」vs「來者不拒（每次路過都算）」！</span>
+      在同一局棋中如果兩次路過十字路口：First-Visit 只取第一次路過到終局的回報，每個回合只貢獻一個獨立數據點；Every-Visit 每次路過都算一次，雖然同一局內有相關性，但兩者隨局數增加都會收斂到真值。
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>First-Visit MC (首訪)</strong>
+        樣本嚴格獨立同分佈 (i.i.d.)。<br>
+        標準誤差依 $1/\sqrt{n}$ 穩定下降，易於理論證明。
+      </div>
+      <div class="contrast-col">
+        <strong>Every-Visit MC (每訪)</strong>
+        同一回合內的樣本存在自相關。<br>
+        漸進收斂，初期數據利用率略高。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：MC 評估一個狀態價值的計算複雜度，是否與環境總狀態數 $|\mathcal{S}|$ 有關？</div>
+      <div class="recall-a"><strong>答案</strong>：完全無關！MC 只沿著採樣軌跡計算，不需要像 DP 一樣遍歷全空間所有狀態求期望。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 6 ==================== -->
+  <!-- Card 3.3 -->
+  <div class="card card-l03">
+    <div class="card-head">
+      <div><span class="card-num">Card 3.3</span> <span class="card-title">離策略學習與重要性採樣 (Off-Policy & Importance Sampling)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">重要性採樣比率與加權平均 (Ordinary vs Weighted IS)</div>
+      $$\rho_{t:T-1} \doteq \prod_{k=t}^{T-1} \frac{\pi(A_k \mid S_k)}{b(A_k \mid S_k)}, \quad V_{\text{weighted}}(s) \doteq \frac{\sum \rho_i G_i}{\sum \rho_i}$$
+    </div>
+    <div class="intuition-box amber">
+      <span class="slogan">💡 粵語金句：「用別人的冒險筆記，練自己的絕世武功！」</span>
+      行為策略 $b$ 負責大膽探索試錯；目標策略 $\pi$ 負責評估最優路線。但因為數據分佈不同，必須乘上比率 $\rho$ 進行概率修正！
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ Ordinary IS vs. Weighted IS 考點陷阱</strong>：
+      Ordinary IS（簡單平均）雖然理論<strong>無偏</strong>，但 $\rho$ 的連乘極易爆炸，方差常為<strong>無窮大</strong>；Weighted IS（加權平均）雖然有偏（漸進無偏），但<strong>方差有界且大幅減小</strong>，工程實踐幾乎全用 Weighted IS！
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：什麼是覆蓋性假設 (Coverage Assumption)？若違反會發生什麼？</div>
+      <div class="recall-a"><strong>答案</strong>：凡是 $\pi(a \mid s) > 0$，必須保證 $b(a \mid s) > 0$。若違反，目標策略可能採取的動作在行為策略中永遠無法被觀測到，導致評估失效。</div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag theme-l04">Lecture 4</span>
+    <h2 class="section-title">Temporal-Difference Learning (Chapter 6)</h2>
+  </div>
+
+  <!-- Card 4.1 -->
+  <div class="card card-l04">
+    <div class="card-head">
+      <div><span class="card-num">Card 4.1</span> <span class="card-title">TD(0) 核心更新與時序差分誤差 (TD Error $\delta_t$)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">單步 TD(0) 預測更新與誤差項</div>
+      $$V(S_t) \leftarrow V(S_t) + \alpha \delta_t, \quad \delta_t \doteq R_{t+1} + \gamma V(S_{t+1}) - V(S_t)$$
+    </div>
+    <div class="intuition-box red">
+      <span class="slogan">💡 粵語金句：TD 誤差 $\delta_t$ 就係你每走一步嘅「心理落差感 / 驚喜度」！</span>
+      TD 是 DP 與 MC 的混血結晶！它像 MC 一樣落場試錯（Model-Free），但每走一步就用下一步的估值更新當前估值（Online Bootstrapping）。$\delta_t$ 就是「實際看到的 ($R + \gamma V'$) 減去 原本預期的 ($V$)」。
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>MC Target: $G_t$</strong>
+        真實終局累積回報。<br>
+        無偏 (Unbiased)，但隨機路徑長，方差極高。
+      </div>
+      <div class="contrast-col">
+        <strong>TD Target: $R_{t+1} + \gamma V(S_{t+1})$</strong>
+        估值推進的一步目標。<br>
+        有單步估值偏差 (Biased)，但方差顯著低。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：若轉移到了終結狀態 ($S_{t+1}$ 為 terminal)，TD(0) 更新式如何簡化？</div>
+      <div class="recall-a"><strong>答案</strong>：終結狀態價值定義為 $V(\text{terminal}) = 0$，公式退化為 $V(S_t) \leftarrow V(S_t) + \alpha [R_{t+1} - V(S_t)]$。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 7 ==================== -->
+  <!-- Card 4.2 -->
+  <div class="card card-l04">
+    <div class="card-head">
+      <div><span class="card-num">Card 4.2</span> <span class="card-title">DP vs. MC vs. TD 終極架構對決 (The Golden Triangle)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">二維空間定位：採樣 (Sampling) $\times$ 自力更生 (Bootstrapping)</div>
+      $$\text{Bootstrapping (自力更新)} \iff \text{DP 與 TD}; \quad \text{Sampling (抽樣試錯)} \iff \text{MC 與 TD}$$
+    </div>
+    <div class="intuition-box red">
+      <span class="slogan">💡 粵語金句：MC 認真執著非等終局，DP 居高臨下需要上帝全知，TD 隨機應變步步為營！</span>
+      在有限經驗的批處理訓練（Batch Training）下：<br>
+      • <strong>TD(0) 收斂到確定性等價解 (Certainty-Equivalence)</strong>：完美符合底層 Markov 模型的最大似然估計。<br>
+      • <strong>MC 收斂到最小均方誤差解 (Minimum MSE)</strong>：單純擬合訓練數據，不利用 Markov 結構。
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 考試高頻案例：Random Walk 批處理實驗</strong>：
+      在有限 Episodes 重複訓練時，TD(0) 在未見過的新轉移預測上 MSE 顯著低於 MC，因為 TD 充分利用了狀態之間的 Markov 依賴傳遞！
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：面對步數無限的持續性任務，MC 和 TD 誰能正常運行？為什麼？</div>
+      <div class="recall-a"><strong>答案</strong>：只有 TD 能運行。因為 TD 每一步都在線更新；MC 永遠無法等到 episode 結束來計算回報。</div>
+    </div>
+  </div>
+
+  <!-- Card 4.3 -->
+  <div class="card card-l04">
+    <div class="card-head">
+      <div><span class="card-num">Card 4.3</span> <span class="card-title">同策略 Sarsa vs. 異策略 Q-Learning (Cliff Walking)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">控制演算法核心更新式</div>
+      $$\text{Sarsa (On-Policy)}: Q(S_t, A_t) \leftarrow Q + \alpha \left[ R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q \right]$$
+      $$\text{Q-Learning (Off-Policy)}: Q(S_t, A_t) \leftarrow Q + \alpha \left[ R_{t+1} + \gamma \max_a Q(S_{t+1}, a) - Q \right]$$
+    </div>
+    <div class="intuition-box red">
+      <span class="slogan">💡 粵語金句：Cliff Walking 懸崖路——Sarsa 謹小慎微繞遠路，Q-Learning 膽大包天貼邊走！</span>
+      • <strong>Sarsa (知行合一)</strong>：評估當前正在跑的 $\epsilon$-greedy 策略。考慮到自己隨時可能手震（$\epsilon$ 探索掉下懸崖），學會走上方遠離懸崖的安全道路。<br>
+      • <strong>Q-Learning (眼高手低)</strong>：直接學習最優策略 $q_*$（不管實際選啥，Target 一律取 $\max$）。學到緊貼懸崖的最短路徑，但在帶有 $\epsilon$ 探索訓練時頻繁失足掉崖！
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>Sarsa (On-Policy)</strong>
+        更新依賴真實執行的動作 $A_{t+1}$。<br>
+        在線訓練回報更高（安全保守）。
+      </div>
+      <div class="contrast-col">
+        <strong>Q-Learning (Off-Policy)</strong>
+        更新依賴虛擬最優動作 $\max_a Q$。<br>
+        漸進收斂至全局最優策略 $q_*$。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：Sarsa 更新需要幾個變量元組？Q-Learning 需要幾個？</div>
+      <div class="recall-a"><strong>答案</strong>：Sarsa 需要 5 元組 $(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$（名稱由來）；Q-Learning 僅需 4 元組 $(S_t, A_t, R_{t+1}, S_{t+1})$，下一步動作由 $\max$ 生成。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 8 ==================== -->
+  <!-- Card 4.4 -->
+  <div class="card card-l04">
+    <div class="card-head">
+      <div><span class="card-num">Card 4.4</span> <span class="card-title">最大化偏差與雙重 Q 學習 (Maximization Bias & Double Q-Learning)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">解耦動作選擇與評估 (Double Q-Learning Update)</div>
+      $$Q_1(S_t, A_t) \leftarrow Q_1 + \alpha \left[ R_{t+1} + \gamma Q_2\left(S_{t+1}, \arg\max_a Q_1(S_{t+1}, a)\right) - Q_1 \right]$$
+    </div>
+    <div class="intuition-box red">
+      <span class="slogan">💡 粵語金句：「裁判與選手分離！」取 Max 必然導致虛高泡沫！</span>
+      數學定理：$\mathbb{E}[\max(X_1, X_2)] \ge \max(\mathbb{E}[X_1], \mathbb{E}[X_2])$。即便所有動作均值為 0，由於採樣噪聲有正有負，取 $\max$ 永遠會挑出正的噪聲峰值，導致嚴重高估！
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 雙 Q 解耦機制 (Decoupling)</strong>：
+      維護兩個獨立 Q 表：用 $Q_1$ <strong>挑選最佳動作</strong>，但交給另一個獨立的 $Q_2$ <strong>評定該動作的價值</strong>。兩者角色輪換，徹底消除系統性過度樂觀估計！
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：為什麼說標準 Q-Learning 在噪聲環境下會嚴重過度估計？</div>
+      <div class="recall-a"><strong>答案</strong>：因為標準 Q-Learning 用同一個估計表既負責挑選動作又負責評估其值，噪聲的最大值被系統性當作真值傳遞。</div>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag theme-l05">Lecture 5</span>
+    <h2 class="section-title">Value Function Approximation (Prediction) (Chapter 9)</h2>
+  </div>
+
+  <!-- Card 5.1 -->
+  <div class="card card-l05">
+    <div class="card-head">
+      <div><span class="card-num">Card 5.1</span> <span class="card-title">告別查表法與泛化能力 (Curse of Dimensionality & Generalization)</span></div>
+      <span class="card-time">⏱️ 2 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">參數化價值函數 (Parameterized Function Approximation)</div>
+      $$\hat{v}(s, \mathbf{w}) \approx v_\pi(s), \quad \text{其中權重維度 } d \ll |\mathcal{S}|$$
+    </div>
+    <div class="intuition-box purple">
+      <span class="slogan">💡 粵語金句：踩油門多 0.001 毫米唔可以當成全新世界！</span>
+      在連續狀態空間（如自動駕駛、機械臂），世界有無窮多個狀態，查表法（Tabular）因記憶體爆炸徹底失效；更致命的是缺乏<strong>泛化能力 (Generalization)</strong>。函數逼近讓 Agent 學會一個狀態，相鄰狀態的估值共同更新！
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>查表法 (Tabular)</strong>
+        每個狀態獨立存儲一個數字。<br>
+        無泛化能力，遭遇維度詛咒。
+      </div>
+      <div class="contrast-col">
+        <strong>函數逼近 (Approx)</strong>
+        用參數 $\mathbf{w}$ 表徵整個函數。<br>
+        能處理連續/無限空間，兼具泛化。
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：為什麼監督學習的常規批處理方法不能直接生搬到強化學習在線預測中？</div>
+      <div class="recall-a"><strong>答案</strong>：因為 RL 採樣數據具有高度時序自相關性（非 i.i.d.），且目標分佈隨策略改善而持續動態漂移（Non-stationary）。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 9 ==================== -->
+  <!-- Card 5.2 -->
+  <div class="card card-l05">
+    <div class="card-head">
+      <div><span class="card-num">Card 5.2</span> <span class="card-title">均方價值誤差 $\overline{\text{VE}}$ 與半梯度下降 (Semi-Gradient SGD)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">半梯度 TD(0) 參數更新式 (Semi-Gradient TD Update)</div>
+      $$\mathbf{w}_{t+1} \leftarrow \mathbf{w}_t + \alpha \left[ R_{t+1} + \gamma \hat{v}(S_{t+1}, \mathbf{w}_t) - \hat{v}(S_t, \mathbf{w}_t) \right] \nabla \hat{v}(S_t, \mathbf{w}_t)$$
+    </div>
+    <div class="intuition-box purple">
+      <span class="slogan">💡 粵語金句：點解叫「半」梯度？因為目標裡面的 $\mathbf{w}$ 被我們假裝當成常數！</span>
+      在 TD 更新中，Target $R_{t+1} + \gamma \hat{v}(S_{t+1}, \mathbf{w})$ 內部其實也依賴 $\mathbf{w}$。真正的梯度應該對 Target 求導，但半梯度方法<strong>直接忽略 Target 對 $\mathbf{w}$ 的導數</strong>！這大大簡化了計算，在線性情況下保證收斂到 TD 不動點。
+    </div>
+    <div class="trap-box">
+      <strong>⚠️ 狀態分佈加權 $\mu(s)$ 的物理意義</strong>：
+      $\overline{\text{VE}}(\mathbf{w}) \doteq \sum_s \mu(s) [v_\pi(s) - \hat{v}(s, \mathbf{w})]^2$。參數維度有限，不可能處處精準；$\mu(s)$ 代表在線訪問頻率，保證在經常遇到的關鍵狀態上擬合最精確！
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：蒙地卡羅 (MC) 的梯度更新是真實梯度還是半梯度？為什麼？</div>
+      <div class="recall-a"><strong>答案</strong>：是真實梯度 (True SGD)。因為 MC 的 Target 是真實累積回報 $G_t$，不包含參數 $\mathbf{w}$，不存在被忽略的求導項。</div>
+    </div>
+  </div>
+
+  <!-- Card 5.3 -->
+  <div class="card card-l05">
+    <div class="card-head">
+      <div><span class="card-num">Card 5.3</span> <span class="card-title">線性特徵構造與致命三要素 (Tile Coding & The Deadly Triad)</span></div>
+      <span class="card-time">⏱️ 3 min</span>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">線性逼近與瓦片編碼 (Linear Function & Tile Coding)</div>
+      $$\hat{v}(s, \mathbf{w}) = \mathbf{w}^\top \mathbf{x}(s) \implies \nabla \hat{v}(s, \mathbf{w}) = \mathbf{x}(s)$$
+    </div>
+    <div class="intuition-box purple">
+      <span class="slogan">💡 粵語金句：「三毒俱全，算法升天！」——三者同時出現，估值隨時爆炸發散！</span>
+      瓦片編碼（Tile Coding）用多層重疊平移的網格覆蓋連續空間，計算速度極快。但必須警惕強化學習著名的<strong>致命三要素 (The Deadly Triad)</strong>：
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <strong>致命三要素 (The Deadly Triad)</strong>
+        1. <strong>函數逼近 (Function Approx)</strong><br>
+        2. <strong>自力更生 (Bootstrapping)</strong><br>
+        3. <strong>離策略學習 (Off-Policy Learning)</strong>
+      </div>
+      <div class="contrast-col">
+        <strong>破局穩定之道 (How to stabilize)</strong>
+        只要<strong>抽掉任意一條</strong>即可收斂：<br>
+        • 查表法 (No Approx)<br>
+        • MC 更新 (No Bootstrap)<br>
+        • 同策略 (On-Policy)
+      </div>
+    </div>
+    <div class="recall-box">
+      <div class="recall-q">🧠 30秒微自測：在瓦片編碼中，如果有 $m$ 個獨立瓦片層，步長參數 $\alpha$ 通常如何設置？</div>
+      <div class="recall-a"><strong>答案</strong>：通常設置為 $\alpha / m$（例如 $0.1 / m$），以保證所有激活特徵權重之和的總步長保持穩定。</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 10 ==================== -->
+  <div class="section-header">
+    <span class="section-tag theme-summary">終極清單</span>
+    <h2 class="section-title">Part 6: 核心更新公式速記表 (The Master Formula Cheatsheet)</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">演算法 / 概念</th>
+        <th style="width: 50%;">核心數學更新式 (Update Rule)</th>
+        <th style="width: 25%;">備份類型與特性</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>增量式樣本平均 (Bandits)</strong></td>
+        <td>$Q_{n+1} = Q_n + \frac{1}{n} [R_n - Q_n]$</td>
+        <td>無狀態單步更新</td>
+      </tr>
+      <tr>
+        <td><strong>UCB 探索動作選擇</strong></td>
+        <td>$A_t = \arg\max_a \left[ Q_t(a) + c \sqrt{\frac{\ln t}{N_t(a)}} \right]$</td>
+        <td>不確定性加權探索</td>
+      </tr>
+      <tr>
+        <td><strong>迭代策略評估 (DP)</strong></td>
+        <td>$v_{k+1}(s) \leftarrow \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) [r + \gamma v_k(s')]$</td>
+        <td>Model-based, Full-width</td>
+      </tr>
+      <tr>
+        <td><strong>價值迭代 (Value Iteration)</strong></td>
+        <td>$v_{k+1}(s) \leftarrow \max_a \sum_{s', r} p(s', r \mid s, a) [r + \gamma v_k(s')]$</td>
+        <td>Bellman Optimality Backup</td>
+      </tr>
+      <tr>
+        <td><strong>蒙地卡羅 (MC Prediction)</strong></td>
+        <td>$V(S_t) \leftarrow V(S_t) + \alpha [G_t - V(S_t)]$</td>
+        <td>Model-free, No Bootstrap, Episodic</td>
+      </tr>
+      <tr>
+        <td><strong>重要性採樣比率 (IS Ratio)</strong></td>
+        <td>$\rho_{t:T-1} = \prod_{k=t}^{T-1} \frac{\pi(A_k \mid S_k)}{b(A_k \mid S_k)}$</td>
+        <td>分佈概率修正因子</td>
+      </tr>
+      <tr>
+        <td><strong>單步時序差分 TD(0)</strong></td>
+        <td>$V(S_t) \leftarrow V(S_t) + \alpha [R_{t+1} + \gamma V(S_{t+1}) - V(S_t)]$</td>
+        <td>Model-free, Bootstrap, Online</td>
+      </tr>
+      <tr>
+        <td><strong>Sarsa (On-Policy TD Control)</strong></td>
+        <td>$Q(S_t, A_t) \leftarrow Q + \alpha [R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q]$</td>
+        <td>評估並改進當前行為策略</td>
+      </tr>
+      <tr>
+        <td><strong>Q-Learning (Off-Policy Control)</strong></td>
+        <td>$Q(S_t, A_t) \leftarrow Q + \alpha [R_{t+1} + \gamma \max_a Q(S_{t+1}, a) - Q]$</td>
+        <td>直接學習最優動作價值 $q_*$</td>
+      </tr>
+      <tr>
+        <td><strong>雙重 Q-Learning (Double Q)</strong></td>
+        <td>$Q_1(S, A) \leftarrow Q_1 + \alpha [R + \gamma Q_2(S', \arg\max_a Q_1(S', a)) - Q_1]$</td>
+        <td>解耦動作選擇與評估，消除高估</td>
+      </tr>
+      <tr>
+        <td><strong>半梯度 TD(0) 預測 (Linear)</strong></td>
+        <td>$\mathbf{w} \leftarrow \mathbf{w} + \alpha [R_{t+1} + \gamma \mathbf{w}^\top \mathbf{x}(S_{t+1}) - \mathbf{w}^\top \mathbf{x}(S_t)] \mathbf{x}(S_t)$</td>
+        <td>線性特徵函數逼近，半梯度</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="guide-box" style="margin-top: 14px; text-align: center;">
+    <strong>🎓 恭喜完成 L01~L05 碎片化核心複習！</strong><br>
+    本手冊涵蓋了 Cumulative Test A 的所有前置核心理論。每天利用 10 分鐘隨身抽查 2~3 張卡片，效果遠勝考前通宵死記硬背！
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
+</body>
+</html>
