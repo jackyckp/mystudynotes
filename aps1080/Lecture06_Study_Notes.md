@@ -1,9 +1,14 @@
 # APS1080: Intro to Reinforcement Learning
 # Lecture 6 Study Notes: Control with Function Approximation & Deep Q-Networks (DQN)
-**Textbook Reference**: Sutton & Barto (2020), Chapters 10 & 11 (Section 11.3)  
+**Textbook Reference**: Sutton & Barto (2020), Chapters 10 & 16 (Section 16.5, cited as 15.6 in outline)  
 **Foundational Paper**: Mnih et al. (2015), *"Human-level control through deep reinforcement learning"*, Nature  
 **Course Schedule**: Lecture 6 (Oct 14)  
-**Code Reference**: [`chapter10/mountain_car.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter10/mountain_car.py), [`chapter10/access_control.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter10/access_control.py)
+**Code Reference**: [`chapter10/mountain_car.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter10/mountain_car.py), [`chapter10/access_control.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter10/access_control.py)
+
+> [!IMPORTANT]
+> **Test 1 Syllabus Scope (`study_outline_test_1.md`)**:
+> - **Function Approximation Control**: Chapter 10 (Sections 10.1 & 10.2), DQN (15.6 in outline / 16.5 in text).
+> - **Note on Exam Scope**: Per `study_outline_test_1.md`, Test 1 also explicitly tests **Policy Gradients** (Chapter 13: 13.1–13.3 + Christiano et al. RLHF) and **Planning** (Chapter 8: 8.1, 8.2, 8.11, 8.12 + AlphaGo 16.6). Refer to `Lecture07_Study_Notes.md`, `Lecture08_Study_Notes.md`, and the unified `Test1_Exam_Master_Study_Notes.md`.
 
 ---
 
@@ -12,7 +17,7 @@
 In Chapter 9, function approximation was applied to evaluate a fixed policy ($\hat{v} \approx v_\pi$). In Chapter 10, we extend function approximation to **control** by approximating the action-value function:
 $$\hat{q}(s, a, \mathbf{w}) \approx q_*(s, a) \quad \text{where } \mathbf{w} \in \mathbb{R}^d$$
 
-### 1.1 Episodic Semi-Gradient Sarsa
+### 1.1 Episodic Semi-Gradient Sarsa (Section 10.1)
 To find an optimal policy, we use the Generalized Policy Iteration (GPI) framework with parameterized action values. At transition $(S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1})$:
 
 $$\mathbf{w}_{t+1} \leftarrow \mathbf{w}_t + \alpha \left[ R_{t+1} + \gamma \hat{q}(S_{t+1}, A_{t+1}, \mathbf{w}_t) - \hat{q}(S_t, A_t, \mathbf{w}_t) \right] \nabla_{\mathbf{w}} \hat{q}(S_t, A_t, \mathbf{w}_t)$$
@@ -25,7 +30,7 @@ flowchart LR
     TDError --> GradUpdate["w_{t+1} = w_t + alpha * delta_t * grad q_hat"]
 ```
 
-### 1.2 Continuous Control Benchmark: Mountain Car ([`chapter10/mountain_car.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter10/mountain_car.py))
+### 1.2 Continuous Control Benchmark: Mountain Car ([`chapter10/mountain_car.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter10/mountain_car.py))
 * **Environment**: Underpowered car stuck in a valley; must drive backward up the left hill to gain enough momentum to reach the goal on the right hill.
 * **State**: Continuous 2D vector $\mathbf{s} = (\text{position } x, \text{velocity } \dot{x})$.
 * **Actions**: $\mathcal{A} = \{-1 \text{ (reverse)}, 0 \text{ (coast)}, +1 \text{ (forward)}\}$.
@@ -35,6 +40,21 @@ flowchart LR
 > 💡 **粵語解構 (Mountain Car：想衝上山，必須先倒車蓄力！)**:  
 > Mountain Car 係 RL 歷史上最標誌性嘅環境之一！架車引擎馬力不足，就算油門踩到盡，架車都會喺半山腰滑返落嚟。Agent 想成功上右邊山頂，**唯一的生路係先向左倒車衝上左邊斜坡，借勢蕩返落嚟先至夠衝力衝上右邊山頂！**  
 > 如果係貪婪嘅盲目 Agent，向左倒車會離終點更遠，佢打死都唔肯做。只有透過 Semi-gradient Sarsa 配搭 Tile Coding，Agent 先至學識「犧牲眼前利益，換取未來勢能」嘅高深物理智慧！
+
+### 1.3 Semi-Gradient $n$-Step Sarsa (Section 10.2)
+To combine the speed of TD bootstrapping with the long-horizon accuracy of Monte Carlo, we generalize 1-step Sarsa to $n$-step Sarsa under function approximation.
+
+#### The $n$-Step Truncated Return:
+$$G_{t:t+n} \doteq R_{t+1} + \gamma R_{t+2} + \dots + \gamma^{n-1} R_{t+n} + \gamma^n \hat{q}(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1})$$
+*(If $t + n \ge T$, where $T$ is the terminal step, the return is simply the empirical Monte Carlo return $G_t$).*
+
+#### Parameter Vector Update Law:
+$$\mathbf{w}_{t+n} \leftarrow \mathbf{w}_{t+n-1} + \alpha \left[ G_{t:t+n} - \hat{q}(S_t, A_t, \mathbf{w}_{t+n-1}) \right] \nabla_{\mathbf{w}} \hat{q}(S_t, A_t, \mathbf{w}_{t+n-1})$$
+
+* **Bias-Variance Trade-Off in Control**:
+  - $n = 1$ (1-step Sarsa): High bias from initial bootstrapping, low variance.
+  - $n = \infty$ (Monte Carlo): Zero bias, high trajectory variance.
+  - **Empirical Sweet Spot**: In the Mountain Car benchmark, an intermediate step-size like $n = 4$ or $n = 8$ achieves significantly faster learning and higher asymptotic performance than 1-step Sarsa!
 
 ---
 

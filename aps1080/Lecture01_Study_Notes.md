@@ -1,7 +1,13 @@
 # APS1080: Intro to Reinforcement Learning
 # Lecture 1 Study Notes: Foundations, Bandits & Finite MDPs
 **Textbook Reference**: Sutton & Barto (2020), Chapters 1, 2, and 3  
-**Associated Course Milestone**: [Exercise 1](file:///G:/Other%20computers/My%20Computer/aps1080/Exercise1.md) (Due Oct 7)
+**Associated Course Milestone**: [Exercise 1](file:///C:/Users/hklov/Local/UToronto/aps1080/Exercise1.md) (Due Oct 7)
+
+> [!IMPORTANT]
+> **Test 1 Syllabus Scope (`study_outline_test_1.md`)**:
+> - **Chapter 1**: All of Ch 1 **EXCLUDING Section 1.7** (1.7 History is non-examinable).
+> - **Chapter 2**: Skim beginning for context; **READ Sections 2.4 and 2.5 ONLY**; **SKIP the rest of the chapter** (2.6–2.10: UCB, Optimistic Init, Gradient Bandits are non-examinable context).
+> - **Chapter 3**: **ALL of Chapter 3** (Finite Markov Decision Processes).
 
 ---
 
@@ -100,26 +106,51 @@ The agent maintains estimates $Q_t(a) \approx q_*(a)$.
 > - 如果你去拉其他未試過嘅機，呢個叫 **Explore（探索）**——但代價係你可能輸錢。  
 > 呢個就係 Bandit 嘅核心矛盾。
 
-### 3.2 Action-Value Estimation & Incremental Updates
-Using sample averages:
-$$Q_t(a) = \frac{\sum_{i=1}^{t-1} R_i \cdot \mathbb{I}(A_i = a)}{\sum_{i=1}^{t-1} \mathbb{I}(A_i = a)}$$
+### 3.2 Action-Value Estimation & Incremental Updates (Sections 2.4 & 2.5)
 
-The general incremental update rule (per-step):
-$$\text{NewEstimate} \leftarrow \text{OldEstimate} + \text{StepSize} \cdot \left[ \text{Target} - \text{OldEstimate} \right]$$
+Let $N_t(a) = \sum_{i=1}^{t-1} \mathbb{I}(A_i = a)$ be the number of times action $a$ was selected prior to time $t$. Using sample averages:
+$$Q_t(a) = \frac{\sum_{i=1}^{t-1} R_i \cdot \mathbb{I}(A_i = a)}{N_t(a)}$$
+
+#### 1. Stationary Case: Incremental Sample Average (Eq 4.1 in Outline)
+Let $R_n$ denote the reward received after the $n$-th selection of action $a$. The incremental sample average update is:
 $$Q_{n+1} = Q_n + \frac{1}{n} [R_n - Q_n]$$
+General form:
+$$\text{NewEstimate} \leftarrow \text{OldEstimate} + \text{StepSize} \cdot \left[ \text{Target} - \text{OldEstimate} \right]$$
+* **Stationarity Requirement**: In this formulation, every past sample receives equal weight $\frac{1}{n}$. This assumes the reward generating process $\{R_i\}$ is **stationary** (its statistical properties do not drift over time).
 
-For non-stationary environments, a constant step-size parameter $\alpha \in (0, 1]$ is used instead of $\frac{1}{n}$:
-$$Q_{n+1} = Q_n + \alpha [R_n - Q_n] = (1 - \alpha)^n Q_1 + \sum_{i=1}^n \alpha (1 - \alpha)^{n-i} R_i$$
-*(an exponentially decaying recency-weighted average)*.
+#### 2. Non-Stationary Case: Constant Step-Size & EWMA / IIR Low-Pass Filter (Eq 4.2 in Outline)
+In non-stationary environments, true reward probabilities drift. We weight recent rewards more heavily than distant past rewards using a constant step-size $\alpha \in (0, 1]$:
+$$Q_{n+1} = Q_n + \alpha [R_n - Q_n]$$
 
-> 💡 **粵語解構 (點解個 Update 公式永遠係咁樣？)**:  
-> 記住呢個貫穿全個 RL 課程嘅無敵萬能公式：  
-> $$\text{新估值} = \text{舊估值} + \text{步長} \times [\text{目標 Target} - \text{舊估值}]$$  
-> 後面個括號 $[ \text{Target} - \text{舊估值} ]$ 就係「**驚喜度 / 預測誤差（Error）**」！  
-> 如果實際結果同你預期一樣，Error = 0，唔洗改；如果比你預期好，Error > 0，將估值向上調；如果比預期差，向下調。  
-> 如果環境會隨時間變（Non-stationary），我哋唔用 $\frac{1}{n}$，而係用固定常數 $\alpha$。咁樣越舊嘅回憶就會以 $(1-\alpha)$ 嘅速度指數級忘記，確保 Agent 永遠重視最新嘅資訊！
+Unrolling the recursion backwards to the initial estimate $Q_1$:
+$$Q_{n+1} = (1 - \alpha)^n Q_1 + \sum_{i=1}^n \alpha (1 - \alpha)^{n-i} R_i$$
 
-### 3.3 Action Selection Strategies
+* **Systems Engineering / DSP Interpretation**:
+  This update rule is a **discrete-time first-order Infinite Impulse Response (IIR) low-pass filter**, also widely known as an **Exponentially Weighted Moving Average (EWMA) filter**.
+  - **Extreme $\alpha = 1$**: $Q_{n+1} = R_n$. The filter has zero memory; the estimate is strictly identical to the latest sample.
+  - **As $\alpha$ decreases ($0 < \alpha < 1$)**: The filter opens a wider memory window into the past, smoothing out noise while tracking drifting means.
+* **Proof that Weights Sum to 1**:
+  $$(1 - \alpha)^n + \sum_{i=1}^n \alpha (1 - \alpha)^{n-i} = (1 - \alpha)^n + \alpha \frac{1 - (1 - \alpha)^n}{1 - (1 - \alpha)} = (1 - \alpha)^n + 1 - (1 - \alpha)^n = 1 \quad \blacksquare$$
+
+#### 3. Stochastic Approximation: Robbins-Monro Convergence Conditions
+Under what step-size sequence $\{\alpha_n(a)\}$ is $Q_n(a)$ guaranteed to converge to the true value with probability 1?
+$$\sum_{n=1}^\infty \alpha_n(a) = \infty \quad \text{(condition 1: large enough to overcome any initial conditions)} $$
+$$\sum_{n=1}^\infty \alpha_n^2(a) < \infty \quad \text{(condition 2: small enough to assure eventual convergence)} $$
+
+| Step-Size Rule | $\sum \alpha_n = \infty$? | $\sum \alpha_n^2 < \infty$? | Convergence Behavior |
+| :--- | :---: | :---: | :--- |
+| **Sample-Average ($\alpha_n = 1/n$)** | **YES** ($\sum \frac{1}{n} = \infty$) | **YES** ($\sum \frac{1}{n^2} = \frac{\pi^2}{6} < \infty$) | Guaranteed convergence to true mean in **stationary** environments. |
+| **Constant Step-Size ($\alpha_n = \alpha$)** | **YES** ($\sum \alpha = \infty$) | **NO** ($\sum \alpha^2 = \infty$) | **Does NOT converge** to a single point; continuously fluctuates around drifting statistics. **This is the exact desired behavior in non-stationary environments!** |
+
+> 💡 **粵語解構 (DSP / EWMA 濾波器角度睇 RL)**:  
+> 點解 Professor 喺 Outline 特別強調 **IIR Low-Pass Filter / EWMA**？  
+> 因為喺工程角度：  
+> - $\alpha = 1$ 就係「完全無記憶，最新一次係幾多就信幾多」（極高頻，噪音極大）。  
+> - $\alpha$ 越細（例如 0.01），就好似個「低通濾波器」，將高頻嘅隨機震盪濾走，平滑地追蹤個底層趨勢。  
+> - 點解 sample average $\frac{1}{n}$ 唔啱用喺動態世界？因為去到第 1,000,000 步，步長變到 $\frac{1}{1000000} \approx 0$，Agent 個腦就「石化」咗，世界點變佢都學唔到新嘢！所以 constant $\alpha$ 故意違反 Robbins-Monro 第二條件（$\sum \alpha^2 = \infty$），永遠保留彈性去追蹤變化！
+
+### 3.3 Action Selection Strategies *(Contextual / Non-examinable)*
+> *Note: Outline instructs to skip 2.6–2.10. Retained below as brief background context.*
 
 ```mermaid
 graph TD
@@ -205,13 +236,40 @@ $$G_t = R_{t+1} + \gamma G_{t+1}$$
 * **Action-Value Function $q_\pi(s, a)$**:
   $$q_\pi(s, a) \doteq \mathbb{E}_\pi [G_t \mid S_t = s, A_t = a]$$
 
-### 5.2 Bellman Expectation Equations
+### 5.2 The Fundamental Two-Step Ladder (Exercises 3.12, 3.18, 3.19)
+A common exam derivation requires breaking the Bellman equation into two alternating steps between state nodes and action nodes:
 
-#### 1. For State-Values $v_\pi(s)$:
-$$v_\pi(s) = \sum_{a \in \mathcal{A}(s)} \pi(a \mid s) \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right]$$
+1. **State-node to Action-nodes ($v_\pi$ in terms of $q_\pi$)**:
+   $$v_\pi(s) = \sum_{a \in \mathcal{A}(s)} \pi(a \mid s) q_\pi(s, a)$$
+2. **Action-node to State-nodes ($q_\pi$ in terms of $v_\pi$)**:
+   $$q_\pi(s, a) = \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right]$$
 
-#### 2. For Action-Values $q_\pi(s, a)$:
-$$q_\pi(s, a) = \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r \mid s, a) \left[ r + \gamma \sum_{a' \in \mathcal{A}(s')} \pi(a' \mid s') q_\pi(s', a') \right]$$
+Substituting (2) into (1) yields the **Bellman Expectation Equation for $v_\pi(s)$**:
+$$v_\pi(s) = \sum_{a \in \mathcal{A}(s)} \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right]$$
+
+Substituting (1) into (2) yields the **Bellman Expectation Equation for $q_\pi(s, a)$**:
+$$q_\pi(s, a) = \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \sum_{a'} \pi(a' \mid s') q_\pi(s', a') \right]$$
+
+#### Matrix-Vector Formulation (Closed-Form Analytical Solution)
+For finite state spaces, the Bellman expectation equation is a system of linear equations:
+$$\mathbf{v}_\pi = \mathbf{r}_\pi + \gamma \mathbf{P}_\pi \mathbf{v}_\pi \implies (\mathbf{I} - \gamma \mathbf{P}_\pi) \mathbf{v}_\pi = \mathbf{r}_\pi \implies \mathbf{v}_\pi = (\mathbf{I} - \gamma \mathbf{P}_\pi)^{-1} \mathbf{r}_\pi$$
+where $\mathbf{r}_\pi(s) = \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) r$ and $\mathbf{P}_\pi(s, s') = \sum_a \pi(a \mid s) p(s' \mid s, a)$.
+*(Inversion has $O(|\mathcal{S}|^3)$ complexity, which becomes unfeasible for large state spaces, necessitating Dynamic Programming).*
+
+#### Three-Argument Expected Rewards $r(s, a, s')$:
+$$r(s, a, s') \doteq \mathbb{E}[R_{t+1} \mid S_t=s, A_t=a, S_{t+1}=s'] = \sum_{r \in \mathcal{R}} r \frac{p(s', r \mid s, a)}{p(s' \mid s, a)}$$
+Equivalently: $v_\pi(s) = \sum_a \pi(a \mid s) \sum_{s'} p(s' \mid s, a) \left[ r(s, a, s') + \gamma v_\pi(s') \right]$.
+
+```text
+Backup Diagrams (Open circle = State, Solid bullet = Action):
+
+       v_pi(s)                q_pi(s, a)                 v_*(s)                 q_*(s, a)
+         (s)                     • (s, a)                 (s)                    • (s, a)
+       /  |  \                 /    \                     / \ (max a)            /    \
+      •   •   •               (s')  (s'')               •    •                 (s')  (s'')
+     / \ / \ / \               |      |                                         |      |  (max a')
+    (s')(s')(s')              •'     •''                                       •'     •''
+```
 
 > 💡 **粵語解構 (拆解 Bellman Expectation 嘅階梯結構)**:  
 > 唔好比上面條式嚇親！佢嘅物理本質極度簡單：  
@@ -228,11 +286,23 @@ An optimal policy $\pi_*$ achieves the maximum possible value for all states:
 $$v_*(s) \doteq \max_\pi v_\pi(s) \quad \forall s \in \mathcal{S}$$
 $$q_*(s, a) \doteq \max_\pi q_\pi(s, a) \quad \forall s \in \mathcal{S}, a \in \mathcal{A}(s)$$
 
-#### 1. Bellman Optimality Equation for $v_*(s)$:
-$$v_*(s) = \max_{a \in \mathcal{A}(s)} \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right]$$
+#### Two-Step Optimality Ladder:
+1. $v_*(s) = \max_{a \in \mathcal{A}(s)} q_*(s, a)$
+2. $q_*(s, a) = \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right]$
 
-#### 2. Bellman Optimality Equation for $q_*(s, a)$:
-$$q_*(s, a) = \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \max_{a'} q_*(s', a') \right]$$
+#### Full Equations:
+1. **For $v_*(s)$**:
+   $$v_*(s) = \max_{a \in \mathcal{A}(s)} \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right]$$
+2. **For $q_*(s, a)$**:
+   $$q_*(s, a) = \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \max_{a'} q_*(s', a') \right]$$
+
+#### Action Selection: $v_*$ vs. $q_*$ (Crucial Exam Concept!)
+* **Selecting actions with $v_*$ requires an environment model**:
+  $$\pi_*(s) = \arg\max_{a} \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right]$$
+  *(The agent must do a one-step lookahead into the future, requiring transition probabilities $p(s', r \mid s, a)$).*
+* **Selecting actions with $q_*$ requires NO model (Model-Free)**:
+  $$\pi_*(s) = \arg\max_{a} q_*(s, a)$$
+  *(The agent simply looks up which action has the highest cached value. No lookahead or environment dynamics needed!)*
 
 > 💡 **粵語解構 (Expectation vs Optimality: 線性與非線性的分水嶺)**:  
 > - **Bellman Expectation Equation**：無 $\max$，只有加權平均（$\sum$）。所以佢係一套**線性方程組（Linear System）**，可以好似高中代數咁用矩陣逆運算 $(\mathbf{I} - \gamma \mathbf{P})^{-1} \mathbf{r}$ 直接解出唯一答案！  

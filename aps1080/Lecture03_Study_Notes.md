@@ -2,7 +2,12 @@
 # Lecture 3 Study Notes: Monte Carlo Methods
 **Textbook Reference**: Sutton & Barto (2020), Chapter 5  
 **Course Schedule**: Lecture 3 (Sept 23)  
-**Code Reference**: [`chapter05/blackjack.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter05/blackjack.py), [`chapter05/infinite_variance.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter05/infinite_variance.py)
+**Code Reference**: [`chapter05/blackjack.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter05/blackjack.py), [`chapter05/infinite_variance.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter05/infinite_variance.py)
+
+> [!IMPORTANT]
+> **Test 1 Syllabus Scope (`study_outline_test_1.md`)**:
+> - **Chapter 5**: Read **ALL of Chapter 5 EXCEPT Sections 5.8 and 5.9** (5.8 *Discounting-aware Importance Sampling* and 5.9 *Per-decision Importance Sampling* are non-examinable).
+> - Required topics: 5.1 MC Prediction, 5.2 Estimation of Action Values, 5.3 Monte Carlo ES, 5.4 On-Policy MC Control, 5.5 Off-Policy Prediction via Importance Sampling, 5.6 Incremental Implementation, 5.7 Off-Policy MC Control.
 
 ---
 
@@ -172,7 +177,96 @@ flowchart TD
 
 ---
 
-## 6. Summary Comparison: DP vs. MC
+### 5.4 Incremental Implementation of Importance Sampling (Section 5.6)
+How do we update importance-sampled averages on an episode-by-episode basis without storing all past returns?
+
+#### 1. Ordinary Importance Sampling:
+Since returns are weighted uniformly by $\frac{1}{n}$, this is simply a sample-average update:
+$$V_{n+1} = V_n + \frac{1}{n} \left[ W_n G_n - V_n \right]$$
+where $W_n = \rho_{t_n:T(n)-1}$ is the importance sampling weight for the $n$-th return.
+
+#### 2. Weighted Importance Sampling:
+Weighted IS requires accumulating the sum of weights. Let $W_k$ be the importance sampling ratio for the $k$-th sample return $G_k$.
+Maintain a running cumulative weight sum $C_n \doteq \sum_{k=1}^n W_k$ (with $C_0 \doteq 0$):
+$$C_{n+1} = C_n + W_{n+1}$$
+The incremental update rule for the value estimate is:
+$$V_{n+1} = V_n + \frac{W_{n+1}}{C_{n+1}} \left[ G_{n+1} - V_n \right] \quad (n \ge 1)$$
+
+> 💡 **粵語解構 (Weighted IS 嘅增量更新點記？)**:  
+> 睇清呢條式：  
+> - 如果係一般平均數，步長係 $\frac{1}{n}$。  
+> - 喺 Weighted IS 入面，步長變成 $\frac{W_{n+1}}{C_{n+1}}$，即係「**新樣本嘅權重，除以歷來所有樣本嘅總權重**」！  
+> 如果新樣本嘅動作李小龍極度讚賞（$W$ 好大），步長就自動變大，大幅更新估值；如果新樣本無厘頭（$W \approx 0$），步長接近 0，完全唔影響舊估值！
+
+---
+
+### 5.5 Off-Policy Monte Carlo Control (Section 5.7)
+
+To perform control, we estimate action values $Q(s, a)$ for the target policy $\pi$ while following behavior policy $b$.
+- Target Policy $\pi$: The deterministic greedy policy $\pi(s) \doteq \arg\max_a Q(s, a)$.
+- Behavior Policy $b$: Any exploratory $\epsilon$-soft policy ensuring coverage ($b(a \mid s) > 0$).
+
+#### Key Algorithmic Mechanics:
+1. Traverse the episode **backwards in time** from $t = T-1$ down to $0$.
+2. At each step, update cumulative weight: $C(S_t, A_t) \leftarrow C(S_t, A_t) + W$.
+3. Update $Q$-value:
+   $$Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \frac{W}{C(S_t, A_t)} \left[ G - Q(S_t, A_t) \right]$$
+4. Update greedy target policy: $\pi(S_t) \leftarrow \arg\max_a Q(S_t, a)$.
+5. **The Critical Termination Condition**:
+   $$\text{If } A_t \neq \pi(S_t), \text{ then EXIT the inner loop (proceed to next episode)!}$$
+   *Why?* Since $\pi$ is deterministic greedy, $\pi(a \mid S_t) = 0$ for any non-greedy action. Thus, the ratio $\frac{\pi(A_t \mid S_t)}{b(A_t \mid S_t)} = 0$. Because the importance weight $W$ multiplies all earlier steps, $W$ collapses to zero for all steps prior to $t$. No further updates can be made from this episode!
+6. If $A_t = \pi(S_t)$, update weight for prior steps:
+   $$W \leftarrow W \frac{1}{b(A_t \mid S_t)}$$
+
+---
+
+## 6. Complete Monte Carlo Control Algorithms
+
+### 6.1 On-Policy First-Visit MC Control (for $\epsilon$-soft policies)
+```text
+Initialize:
+  π ← an arbitrary ε-soft policy
+  Q(s, a) ∈ ℝ arbitrarily, for all s ∈ 𝒮, a ∈ 𝒜(s)
+  Returns(s, a) ← empty list, for all s ∈ 𝒮, a ∈ 𝒜(s)
+
+Loop forever (for each episode):
+  Generate an episode following π: S_0, A_0, R_1, ..., S_{T-1}, A_{T-1}, R_T
+  G ← 0
+  Loop for each step of episode, t = T-1, T-2, ..., 0:
+    G ← γ G + R_{t+1}
+    Unless the pair S_t, A_t appears in S_0, A_0, ..., S_{t-1}, A_{t-1}:
+      Append G to Returns(S_t, A_t)
+      Q(S_t, A_t) ← average(Returns(S_t, A_t))
+      A* ← argmax_a Q(S_t, a)
+      For each a ∈ 𝒜(S_t):
+        π(a | S_t) ← 1 - ε + ε/|𝒜(S_t)|  if a = A*
+                     ε/|𝒜(S_t)|          if a ≠ A*
+```
+
+### 6.2 Off-Policy MC Control (for estimating $\pi \approx \pi_*$)
+```text
+Initialize, for all s ∈ 𝒮, a ∈ 𝒜(s):
+  Q(s, a) ∈ ℝ (arbitrarily)
+  C(s, a) ← 0
+  π(s) ← argmax_a Q(s, a)
+
+Loop forever (for each episode):
+  b ← any soft policy (e.g., ε-greedy with respect to Q)
+  Generate an episode using b: S_0, A_0, R_1, ..., S_{T-1}, A_{T-1}, R_T
+  G ← 0
+  W ← 1
+  Loop for each step of episode, t = T-1, T-2, ..., 0:
+    G ← γ G + R_{t+1}
+    C(S_t, A_t) ← C(S_t, A_t) + W
+    Q(S_t, A_t) ← Q(S_t, A_t) + (W / C(S_t, A_t)) * [G - Q(S_t, A_t)]
+    π(S_t) ← argmax_a Q(S_t, a)
+    If A_t ≠ π(S_t) then exit_inner_loop
+    W ← W * (1 / b(A_t | S_t))
+```
+
+---
+
+## 7. Summary Comparison: DP vs. MC
 
 | Feature | Dynamic Programming (DP) | Monte Carlo (MC) |
 | :--- | :--- | :--- |

@@ -1,7 +1,12 @@
 # APS1080: Intro to Reinforcement Learning
 # Lecture 2 Study Notes: Dynamic Programming & Generalized Policy Iteration
 **Textbook Reference**: Sutton & Barto (2020), Chapter 4  
-**Associated Course Milestone**: [Assignment 1: Dynamic Programming](file:///G:/Other%20computers/My%20Computer/aps1080/README.md#L101) (Due Oct 14)
+**Associated Course Milestone**: [Assignment 1: Dynamic Programming](file:///C:/Users/hklov/Local/UToronto/aps1080/assignment/A1_DynProg.ipynb) (Due Oct 14)
+
+> [!IMPORTANT]
+> **Test 1 Syllabus Scope (`study_outline_test_1.md`)**:
+> - **Chapter 4**: Read **ALL of Chapter 4 EXCEPT Section 4.5** (Section 4.5 *Asynchronous Dynamic Programming* is explicitly non-examinable).
+> - Required sections: 4.1 Policy Evaluation, 4.2 Policy Improvement, 4.3 Policy Iteration, 4.4 Value Iteration, 4.6 Generalized Policy Iteration, and 4.7 Efficiency of Dynamic Programming.
 
 ---
 
@@ -86,10 +91,25 @@ $$v_{\pi'}(s) \ge v_\pi(s) \quad \forall s \in \mathcal{S}$$
 
 If strict inequality holds at any state, then $\pi'$ is strictly superior to $\pi$.
 
+#### Mathematical Proof (Unrolling by Recursive Substitution):
+Starting from the condition $v_\pi(s) \le q_\pi(s, \pi'(s))$:
+$$\begin{aligned}
+v_\pi(s) &\le q_\pi(s, \pi'(s)) \\
+&= \mathbb{E} \left[ R_{t+1} + \gamma v_\pi(S_{t+1}) \mid S_t = s, A_t = \pi'(s) \right] \\
+&= \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma v_\pi(S_{t+1}) \mid S_t = s \right] \\
+&\le \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma q_\pi(S_{t+1}, \pi'(S_{t+1})) \mid S_t = s \right] \quad \text{(applying condition to } S_{t+1}\text{)} \\
+&= \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma \mathbb{E}_{\pi'}[R_{t+2} + \gamma v_\pi(S_{t+2})] \mid S_t = s \right] \\
+&= \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma R_{t+2} + \gamma^2 v_\pi(S_{t+2}) \mid S_t = s \right] \\
+&\le \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 v_\pi(S_{t+3}) \mid S_t = s \right] \\
+&\ \ \vdots \\
+&\le \mathbb{E}_{\pi'} \left[ R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots \mid S_t = s \right] \\
+&= v_{\pi'}(s) \quad \blacksquare
+\end{aligned}$$
+
 > 💡 **粵語解構 (Policy Improvement Theorem 嘅白話精髓)**:  
 > 呢個定理係成個 RL 最偉大嘅數學保證之一！  
 > 佢話：「如果喺某個狀態，你轉行另一個動作 $a$，而呢個動作帶嚟嘅預期回報 $q_\pi(s, a)$ 竟然高過你原本策略嘅身價 $v_\pi(s)$；咁樣，你直接將成套策略更新做『見到 $s$ 就必出動作 $a$』，你成套新策略嘅整體表現就保證**只會變好、絕對唔會變差**！」  
-> 呢個定理比咗我哋膽量去放心貪婪化（Greedy Update），唔洗驚改咗某一步會搞躝全局！
+> 上面條證明就係「無限套娃」：你每推遲一步換返原本策略，個期望值都只會更高，推遲到無限步之後，就徹底證明咗整套新策略 $v_{\pi'}(s)$ 一定大過或等於舊策略 $v_\pi(s)$！
 
 ### 3.3 Greedy Policy Generation
 We update the policy greedily with respect to the action values:
@@ -175,10 +195,79 @@ flowchart TD
 
 ---
 
-## 7. Connecting Lecture 2 to Assignment 1
+## 7. Efficiency of Dynamic Programming (Section 4.7)
 
-In [Assignment 1](file:///G:/Other%20computers/My%20Computer/aps1080/README.md#L101), you will implement:
+### 7.1 Polynomial vs. Exponential Complexity
+* **Polynomial Time Bound**:
+  For an MDP with $n = |\mathcal{S}|$ states and $m = |\mathcal{A}|$ actions, Dynamic Programming algorithms find an optimal policy in **polynomial time in the number of states and actions**.
+  - A single evaluation sweep takes $O(m n^2)$ operations in the general case (or $O(m n)$ if transition dynamics are sparse).
+  - Even though the total number of policy iteration sweeps is not formally proven to be polynomial, in practice Policy Iteration and Value Iteration converge in very few iterations (often $O(n)$ or even sub-linear in practical problems).
+* **Exponential Brute-Force Search**:
+  There are $m^n$ distinct deterministic policies. A direct exhaustive search over policies is **exponential in the number of states**, which is utterly impossible for even modest problems (e.g., $4^{16} \approx 4.3 \times 10^9$ policies for a tiny $4 \times 4$ gridworld). DP provides an **exponential speedup** over brute force!
+
+### 7.2 DP vs. Linear Programming (LP)
+* MDPs can also be formulated as Linear Programs and solved using general LP solvers (e.g., simplex or interior point methods).
+* LP has guaranteed worst-case polynomial bounds; however, for practical reinforcement learning problems, **DP methods (Value Iteration and Policy Iteration) are orders of magnitude faster** and use substantially less memory, routinely handling state spaces with millions of states.
+
+### 7.3 The True Limitation: Bellman's "Curse of Dimensionality"
+* DP's computational complexity is polynomial in the number of states $n$.
+* However, the number of states $n$ itself typically grows **exponentially in the number of state variables** (features).
+* For example, a robot with 10 joints discretized into only 10 angles each produces $10^{10} = 10 \text{ billion}$ states!
+* *Resolution*: This limitation is not a defect of DP, but a fundamental property of the state representation. It directly motivates the need for **Function Approximation** (Lectures 5 & 6) and **Sample-Based RL** (Monte Carlo & TD).
+
+---
+
+## 8. Complete DP Algorithms (Sutton & Barto 2020)
+
+### 8.1 Policy Iteration (for estimating $\pi \approx \pi_*$)
+```text
+1. Initialization:
+   V(s) ∈ ℝ and π(s) ∈ 𝒜(s) arbitrarily for all s ∈ 𝒮; V(terminal) = 0
+
+2. Policy Evaluation:
+   Loop:
+     Δ ← 0
+     Loop for each s ∈ 𝒮:
+       v ← V(s)
+       V(s) ← ∑_{s', r} p(s', r | s, π(s)) [ r + γ V(s') ]
+       Δ ← max(Δ, |v - V(s)|)
+   Until Δ < θ (a small positive threshold)
+
+3. Policy Improvement:
+   policy-stable ← true
+   Loop for each s ∈ 𝒮:
+     old-action ← π(s)
+     π(s) ← argmax_a ∑_{s', r} p(s', r | s, a) [ r + γ V(s') ]
+     If old-action ≠ π(s), then policy-stable ← false
+   If policy-stable is true, then stop and return V ≈ v_* and π ≈ π_*;
+   else go to 2
+```
+
+### 8.2 Value Iteration (for estimating $v \approx v_*$)
+```text
+1. Initialization:
+   V(s) ∈ ℝ arbitrarily for all s ∈ 𝒮; V(terminal) = 0
+
+2. Value Sweep:
+   Loop:
+     Δ ← 0
+     Loop for each s ∈ 𝒮:
+       v ← V(s)
+       V(s) ← max_a ∑_{s', r} p(s', r | s, a) [ r + γ V(s') ]
+       Δ ← max(Δ, |v - V(s)|)
+   Until Δ < θ (a small positive threshold)
+
+3. Policy Extraction:
+   Output a deterministic policy π ≈ π_* such that:
+     π(s) = argmax_a ∑_{s', r} p(s', r | s, a) [ r + γ V(s') ]
+```
+
+---
+
+## 9. Connecting Lecture 2 to Assignment 1
+
+In [Assignment 1](file:///C:/Users/hklov/Local/UToronto/aps1080/assignment/A1_DynProg.ipynb), you implement:
 1. **Iterative Policy Evaluation** on Gridworld (`chapter03/grid_world.py`).
-2. **Policy Iteration** (Policy Evaluation loop + Greedy Policy Improvement).
+2. **Policy Iteration** (Policy Evaluation loop + Greedy Policy Improvement with `policy-stable` flag).
 3. **Value Iteration** (Single sweep using Bellman Optimality operator).
 4. Analysis of stopping criteria ($\theta = 10^{-4}$), discount factors $\gamma \in \{0.5, 0.9, 1.0\}$, and boundary collision conditions.

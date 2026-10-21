@@ -1,8 +1,13 @@
 # APS1080: Intro to Reinforcement Learning
 # Lecture 5 Study Notes: On-Policy Prediction with Function Approximation
-**Textbook Reference**: Sutton & Barto (2020), Chapter 9  
+**Textbook Reference**: Sutton & Barto (2020), Chapter 9 (Sections 9.1, 9.2, 9.3, 9.4, 9.7, 9.12)  
 **Course Schedule**: Lecture 5 (Oct 7)  
-**Code Reference**: [`chapter09/random_walk.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter09/random_walk.py), [`chapter09/square_wave.py`](file:///G:/Other%20computers/My%20Computer/aps1080/chapter09/square_wave.py)
+**Code Reference**: [`chapter09/random_walk.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter09/random_walk.py), [`chapter09/square_wave.py`](file:///C:/Users/hklov/Local/UToronto/aps1080/chapter09/square_wave.py)
+
+> [!IMPORTANT]
+> **Test 1 Syllabus Scope (`study_outline_test_1.md`)**:
+> - **Chapter 9 Scope**: Sections 9.1 (Value Error $\overline{\text{VE}}$), 9.2 (Prediction Objective), 9.3 (SGD & Semi-Gradient), 9.4 (Linear Methods & TD Fixed Point), 9.7 (Tile Coding), 9.12 (Summary).
+> - Refer to `Test1_Exam_Master_Study_Notes.md` for unified exam synthesis.
 
 ---
 
