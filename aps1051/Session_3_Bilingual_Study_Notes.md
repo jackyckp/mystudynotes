@@ -3,8 +3,7 @@
 
 **Course / 課程：** APS1051: Portfolio Management under Real Market Constraints（真實市場約束下的投資組合管理）  
 **Institution / 機構：** University of Toronto | Master of Engineering (ELITE Program)  
-**Instructors / 教授：** Sabatino Costanzo & Loren Trigo  
-**Student / 學生：** ChunKit Poon（潘俊傑）  
+**Instructors / 教授：** Sabatino Costanzo & Loren Trigo   
 **Primary Source Materials / 核心教學材料：**
 * `S3A1.Presentations`: `PortfolioPresentation.pptx` (69 Slides) & `PortfolioPresentation_GUIDE.pdf` (Complete Spoken Commentary)
 * `S3B1.Presentations`: `1.EffectOfDiversification.pptx` (10 Slides) & `1.Effect of Diversification_GUIDE.pdf`

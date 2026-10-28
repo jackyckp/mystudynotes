@@ -229,7 +229,7 @@ $$\Delta S_i = w_{p,i} (R_{p,i} - R_{B,i})$$
 
 ## 第五部分：第一課 12 大課堂反思練習（Session Exercises）速查
 
-Session 1 嘅作業要求將散落喺講義註解中嘅 12 個 Checkpoint 寫成綜合 Word 報告（`ChunKit.Poon_Session1_Exercises.docx`），其核心精要如下：
+Session 1 嘅作業要求將散落喺講義註解中嘅 12 個 Checkpoint 寫成綜合 Word 報告（`FirstName.LastName_Session1_Exercises.docx`），其核心精要如下：
 1. **Checkpoint 1–3（PPP 0）：** 全景 11 模塊、無摩擦世界與真實市場約束（流動性、賣空限制、交易成本）嘅脫節。
 2. **Checkpoint 4–6（PPP 1）：** Treynor 比率本質、Sharpe 比率惩罰特異風險、Jensen's Alpha 剝離大市噪音。
 3. **Checkpoint 7–9（PPP 2）：** 阿爾法與貝塔嘅機構定價博弈、信息比率 IR 衡量主動勝率、CSI 全球 Sharpe 基準評定。

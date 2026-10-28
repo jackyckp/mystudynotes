@@ -3,8 +3,7 @@
 
 **Course / 課程：** APS1051: Portfolio Management under Real Market Constraints（真實市場約束下的投資組合管理）  
 **Institution / 機構：** University of Toronto | Master of Engineering (ELITE Program)  
-**Instructors / 教授：** Sabatino Costanzo & Loren Trigo  
-**Student / 學生：** ChunKit Poon（潘俊傑）  
+**Instructors / 教授：** Sabatino Costanzo & Loren Trigo
 **Primary Source Materials / 核心教學材料：**
 * `S2A CLASS 2 PPP PRESENTATIONS UPDT` (137 Slides across Presentations 0, 1, and 2)
 * `S2BX CLASS 2 COMMENTS TO PPP` (Instructor Transcripts, Blackboard Proofs & Caveats)

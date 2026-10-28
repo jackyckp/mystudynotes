@@ -334,4 +334,4 @@ sequenceDiagram
 > [!TIP]
 > 呢份作業嘅完整 4 頁 Word 文件已經嚴格按照上述結構為你撰寫好，存放在根目錄：  
 > [`FirstName.LastName_Session2_Analytical_Essay.docx`](file:///G:/Other%20computers/My%20Computer/aps1051/FirstName.LastName_Session2_Analytical_Essay.docx)  
-> 上傳 Quercus 前記得將檔案名改為你的真實姓名：`ChunKit.Poon.docx`。
+> 上傳 Quercus 前記得將檔案名改為你的真實姓名：`FirstName.LastName.docx`。
